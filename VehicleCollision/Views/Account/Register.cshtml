@@ -51,11 +51,12 @@
         id: userHandle
     };
 
-    navigator.credentials.create({ publicKey: { challenge, rp, user, pubKeyCredParams } })
+    navigator.credentials.create({ publicKey: {challenge, rp, user, pubKeyCredParams } })
         .then((credentials) => {
             let encodedCredentials = {
                 id: credentials.id,
                 rawId: btoa(String.fromCharCode.apply(null, new Uint8Array(credentials.rawId))),
+                type: credentials.type,
                 response: {
                     attestationObject:
                         btoa(String.fromCharCode.apply(null, new Uint8Array(credentials.response.attestationObject))),
@@ -81,7 +82,7 @@
             });
         })
         .catch((error) => {
-            consol.error(error);
+            console.error(error);
         });
 
 </script>
