@@ -12,7 +12,7 @@ namespace VehicleCollision.Models
     public static class TempAccountSeed
     {
 
-        private const string adminUser = "Admin";
+        private const string adminUser = "Admin1234";
         private const string adminPassword = "Admin123&money!";
 
         public static async void EnsurePopulated(IApplicationBuilder app)
