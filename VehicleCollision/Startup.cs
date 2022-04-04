@@ -27,7 +27,7 @@ namespace VehicleCollision
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlite(Configuration["ConnectionStrings:IdentityDBConnection"]));
+                options.UseMySql(Configuration["ConnectionStrings:IdentityDBConnection"]));
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
