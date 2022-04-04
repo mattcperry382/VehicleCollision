@@ -28,6 +28,10 @@ namespace VehicleCollision
         {
             services.AddDbContext<IdentityContext>(options =>
                 options.UseMySql(Configuration["ConnectionStrings:IdentityDBConnection"]));
+            services.AddDbContext<CollisionContext>(options =>
+                options.UseMySql(Configuration["ConnectionStrings:CollisionDBConnection"]));
+            services.AddScoped<ICollisionRepository, EFCollisionRepository>();
+          
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -83,11 +87,9 @@ namespace VehicleCollision
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
             });
-
-
             TempAccountSeed.EnsurePopulated(app);
-
         }
     }
 }
