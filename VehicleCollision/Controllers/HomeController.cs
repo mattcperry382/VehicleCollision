@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,21 @@ namespace VehicleCollision.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private ICollisionRepository _repo { get; set; }
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ICollisionRepository temp)
         {
-            _logger = logger;
+            _repo = temp;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var crashes = _repo.Crashes
+                .Include(x => x.CrashSeverity)
+                //.Where(x => x.CrashSeverity.Description == description || description == null)
+                .ToList();
+
+            return View(crashes);
         }
 
         public IActionResult Privacy()
