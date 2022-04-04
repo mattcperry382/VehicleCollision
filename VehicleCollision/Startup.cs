@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VehicleCollision.Models;
 
 namespace VehicleCollision
 {
@@ -23,7 +26,32 @@ namespace VehicleCollision
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<IdentityContext>(options =>
+                options.UseSqlite(Configuration["ConnectionStrings:IdentityDBConnection"]));
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 10;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequireNonAlphanumeric = false;
+                options.User.RequireUniqueEmail = true;
+
+
+            }).AddEntityFrameworkStores<IdentityContext>();
+
+            //services.AddFido(options =>
+            //{
+            //options.Licensee = "DEMO";
+            //options.LicenseKey =
+            //    "eyJTb2xkRm9yIjowLjAsIktleVByZXNldCI6NiwiU2F2ZUtleSI6ZmFsc2UsIkxlZ2FjeUtleSI6ZmFsc2UsIlJlbmV3YWxTZW50VGltZSI6IjAwMDEtMDEtMDFUMDA6MDA6MDAiLCJhdXRoIjoiREVNTyIsImV4cCI6IjIwMjItMDUtMDRUMDE6MDA6MDMuNTMzNDU5OSswMDowMCIsImlhdCI6IjIwMjItMDQtMDRUMDE6MDA6MDMiLCJvcmciOiJERU1PIiwiYXVkIjo2fQ==.fKuw59Ym4xwWB6dSYpfENPLblFROIzjj6P5LehisgGVioN+9H1K6wKdiP5aIHuJgLgVbx02emmSK9E4navvKR4/SxXabY1ebMD8uTzqfzfsPZA8zPONiH6qYwdciSIPpdNOQEbYjdJgRmECyfj3P5pxZjSYaqQoJacKf1ex30ULOXVLopi656kNKB3EIK5Pbvs+nNM97hfbBXLTFsvlAjsMABbQ4gZ4PCFTjTlsQxolze7CYfZTv0JUBmdIsfvQ1KpHvXFCogQbQVIT8sSPUaZjLfJZycnkMK/K9PWvedcmHUDVb7RK39W6O0XWRLjwDJLRwTAUVt0lsQJutO1gSMlbYoLC3L4fU5sUscu0cFhHm39Fe9AnN3ltDu/x0yyjRNzdghSdFC+1xz5Oo1ZBXkEc6PCX47KQ44jWvffUWsf2jLeR9LeUeKEQWoEX/J9gtKPtjxyl0WHo0NDf0CkauaMEQ1nPqH65CmwqeSKSvk1r0w7im2a5JWknM3kt6EPRJ5YIca8k4U2ONiyND0paUBcN+40cQEOJlmplLYS7r8jt6LRTNUrrOtY0EZ1w5A1ZXF5vNFx48wn+r1vURGcqGbqzdTHmePd2hkOFK7h8+vloqbNZ5XvoD+I1bkm+oFqZcRdcE0xW+f1hKAE/QpvFsZPY+M37bXjPo1Hob1llKT2o=");
+            //}).AddFidoServerApi;
+
             services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,14 +72,22 @@ namespace VehicleCollision
 
             app.UseRouting();
 
+            //authentication and Identity
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+
+            TempAccountSeed.EnsurePopulated(app);
+
         }
     }
 }
