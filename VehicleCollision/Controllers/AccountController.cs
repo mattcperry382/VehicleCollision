@@ -86,7 +86,7 @@ namespace VehicleCollision.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CompleteRegis(
+        public async Task<IActionResult> CompleteRegistration(
             [FromBody] Base64FidoRegistrationResponse registrationResponse)
         {
             var result = await _fido.CompleteRegistration(registrationResponse.ToFidoResponse());
