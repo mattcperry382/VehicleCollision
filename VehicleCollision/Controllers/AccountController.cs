@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-//using Rsk.AspNetCore.Fido;
-//using Rsk.AspNetCore.Fido.Dtos;
+using Rsk.AspNetCore.Fido;
+using Rsk.AspNetCore.Fido.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +17,13 @@ namespace VehicleCollision.Controllers
         private UserManager<IdentityUser> userManager;
         private SignInManager<IdentityUser> signInManager;
 
+        //fido
+        private readonly IFidoAuthentication _fido;
 
-        //private readonly IFidoAuthentication _fido;
+        public AccountController(IFidoAuthentication fido, UserManager<IdentityUser> userM, SignInManager<IdentityUser> signM)
+        {//
 
-        public AccountController(UserManager<IdentityUser> userM, SignInManager<IdentityUser> signM)
-        {//IFidoAuthentication fido, 
-
-            //_fido = fido;
+            _fido = fido;
             userManager = userM;
             signInManager = signM;
         }
@@ -68,31 +68,31 @@ namespace VehicleCollision.Controllers
         //FIDO STUFF
 
 
-        //[Authorize]
-        //public IActionResult StartReg()
-        //{
-        //    return View();
-        //}
+        [Authorize]
+        public IActionResult StartRegistration()
+        {
+            return View();
+        }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Register(FidoRegist model)
-        //{
-        //    //init regis process and challenge device
-        //    //change user name to different value. See vid 745min
-        //    var challenge = await _fido.InitiateRegistration(User.Identity.Name, model.Device);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(FidoRegist model)
+        {
+            //init regis process and challenge device
+            //change user name to different value. See vid 745min
+            var challenge = await _fido.InitiateRegistration(User.Identity.Name, model.Device);
 
-        //    return View(challenge.ToBase64Dto());
-        //}
+            return View(challenge.ToBase64Dto());
+        }
 
-        //[HttpPost]
-        //public async Task<IActionResult> CompleteRegis(
-        //    [FromBody] Base64FidoRegistrationResponse registrationResponse)
-        //{
-        //    var result = await _fido.CompleteRegistration(registrationResponse.ToFidoResponse());
+        [HttpPost]
+        public async Task<IActionResult> CompleteRegistration(
+            [FromBody] Base64FidoRegistrationResponse registrationResponse)
+        {
+            var result = await _fido.CompleteRegistration(registrationResponse.ToFidoResponse());
 
-        //    if (result.IsError) return BadRequest(result.ErrorDescription);
-        //    return Ok();
-        //}
+            if (result.IsError) return BadRequest(result.ErrorDescription);
+            return Ok();
+        }
     }
 }
