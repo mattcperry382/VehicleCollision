@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace VehicleCollision.Pages
+namespace Temple_Tour_SignUp.Pages.Appointments
 {
-    public class CollisionDataModel : PageModel
+    public class IndexModel : PageModel
     {
         public void OnGet()
         {
