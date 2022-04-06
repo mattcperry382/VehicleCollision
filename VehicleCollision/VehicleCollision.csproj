@@ -24,4 +24,19 @@
     <PackageReference Include="Rsk.AspNetCore.Fido" Version="1.3.0" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\Admin\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Pages\Admin\Routed.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>

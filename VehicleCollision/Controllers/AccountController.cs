@@ -93,7 +93,7 @@ namespace VehicleCollision.Controllers
             if (result.IsError) return BadRequest(result.ErrorDescription);
             return Ok();
         }
-        
+
         //pulls up authenticator requirment
         public async Task<IActionResult> Authen()
         {
@@ -138,5 +138,6 @@ namespace VehicleCollision.Controllers
             return Ok();
 
         }
+
     }
 }

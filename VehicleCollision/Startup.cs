@@ -114,27 +114,28 @@ namespace VehicleCollision
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //X-Xss Protection
-            app.Use(async (context, next) =>
-            {
-                context.Response.Headers.Add("X-Xss-Protection", "1");
-                await next();
-            });
+            ////X-Xss Protection
+            //app.Use(async (context, next) =>
+            //{
+            //    context.Response.Headers.Add("X-Xss-Protection", "1");
+            //    await next();
+            //});
 
-            app.Use(async (ctx, next) =>
-            {
-                ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; font-src 'self' data: fonts.gstatic.com;style-src 'self' fonts.googleapis.com; img-src 'self' data:") ;
-                await next();
-            });
+            //app.Use(async (ctx, next) =>
+            //{
+            //    ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; font-src 'self' data: fonts.gstatic.com;style-src 'self' fonts.googleapis.com; img-src 'self' data:") ;
+            //    await next();
+            //});
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
-                endpoints.MapBlazorHub();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
             });
             TempAccountSeed.EnsurePopulated(app);
         }
