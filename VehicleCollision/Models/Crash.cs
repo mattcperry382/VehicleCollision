@@ -50,7 +50,7 @@ namespace VehicleCollision.Models
         [Required]
         public bool TeenageDriverInvolved { get; set; }
         [Required]
-        public bool OlderDriverInvolving { get; set; }
+        public bool OlderDriverInvolved { get; set; }
         [Required]
         public bool NightDarkCondition { get; set; }
         [Required]
