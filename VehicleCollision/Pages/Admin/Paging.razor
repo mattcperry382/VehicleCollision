@@ -1,7 +1,7 @@
-﻿<h3>Paging</h3>
+﻿@*<h3>Paging</h3>*@
 
 @using Microsoft.AspNetCore.Mvc.Rendering;
-@using VehicleCollision.Models
+@using VehicleCollision.Models.ViewModels
 
 <style>
     .pagingDiv {
@@ -67,9 +67,9 @@
             if (anchorInnerHtml == "..")
                 tag.Attributes["href"] = "#";
             else if (i == 1)
-                tag.Attributes["href"] = "/Collisions";
+                tag.Attributes["href"] = "/collisions";
             else
-                tag.Attributes["href"] = "/Collisions/" + i;
+                tag.Attributes["href"] = "/collisions/" + i;
 
             if (PageClassesEnabled)
             {

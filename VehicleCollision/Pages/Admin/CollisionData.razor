@@ -1,14 +1,17 @@
 ﻿@page "/admin/collisions/"
 @page "/admin"
+@page "/collisions/{Page:int}"
+
 @inherits OwningComponentBase<ICollisionRepository>
+@using VehicleCollision.Models.ViewModels 
 
 <h1>Collisions</h1>
 
-
+<Paging PI="pagingInfo" PageClassesEnabled="true" PageClass="Paging" PageClassSelected="active"></Paging>
 <table class="table table-responsive table-striped table-bordered">
     <thead class="thead-dark">
         <tr>
-            <td>#</td>
+            @*<td>#</td>*@
             <td>Crash ID</td>
             <td>Date/Time</td>
             <td>Route</td>
@@ -32,7 +35,7 @@
                 @if (i < 50)
                 {
                     <tr>
-                        <td>@(i += 1)</td>
+                        @*<td>@(i += 1)</td>*@
                         <td>@c.CrashId</td>
                         <td>@c.CrashDatetime</td>
                         <td>@c.Route</td>
@@ -109,8 +112,9 @@
             <tr><td colspan="14" class="text-secondary text-center font-weight-bold">Loading Collisions...</td></tr>
         }
     </tbody>
+   
 </table>
-
+<Paging PI="pagingInfo" PageClassesEnabled="true" PageClass="Paging" PageClassSelected="active"></Paging>
 
 @code {
     public ICollisionRepository repo => Service;
@@ -137,4 +141,31 @@
         repo.DeleteCrash(c);
         await UpdateData();
     }
+
+    [Parameter]
+    public int page { get; set; }
+
+    PageInfo pagingInfo = new PageInfo();
+
+    protected override void OnParametersSet()
+    {
+        CreatePagingInfo();
+    }
+
+    public void CreatePagingInfo()
+    {
+        var AllCrashes = repo.Crashes.Include(c => c.CrashSeverity);
+
+        int PageSize = 25;
+        pagingInfo = new PageInfo();
+        page = page == 0 ? 1 : page;
+        pagingInfo.CurrentPage = page;
+        pagingInfo.TotalNumCrashes = AllCrashes.Count();
+        pagingInfo.CrashesPerPage = PageSize;
+        
+        var skip = PageSize * (Convert.ToInt32(page) - 1);
+        Crashes = AllCrashes.Skip(skip).Take(PageSize).ToList();
+    }
 }
+
+
