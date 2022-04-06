@@ -34,7 +34,6 @@ namespace VehicleCollision
             services.AddDbContext<CollisionContext>(options =>
                 options.UseMySql(Configuration["ConnectionStrings:CollisionDBConnection"]));
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
-
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;

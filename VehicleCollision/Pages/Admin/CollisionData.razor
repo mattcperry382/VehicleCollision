@@ -1,4 +1,4 @@
-﻿@page "/Pages/CollisionData" 
+﻿@*@page "/Pages/CollisionData" 
 
 @using VehicleCollision.Models
 @inherits OwningComponentBase<ICollisionRepository>
@@ -26,53 +26,53 @@
         @foreach (var c in Crashes)
         {
             <tr>
-                <td>@c.CrashId</td>
-                <td>@c.CrashDatetime</td>
-                <td>@c.Route</td>
-                <td>@c.Milepoint</td>
-                <td>@c.LatUtmY, @c.LongUtmX</td>
-                <td>@c.MainRoadName</td>
-                <td>@c.City</td>
-                <td>@c.CountyName</td>
-                <td>@c.CrashSeverity.Description</td>
+                <td>@c.crash_id</td>
+                <td>@c.crash_datetime</td>
+                <td>@c.route</td>
+                <td>@c.milepoint</td>
+                <td>@c.lat_utm_y, @c.long_utm_x</td>
+                <td>@c.main_road_name</td>
+                <td>@c.city</td>
+                <td>@c.county_name</td>
+                <td>@c.CrashSeverity.description</td>
                 <td>
-                    @if (c.WorkZoneRelated)
+                    @if (c.work_zone_related)
                     {<p>Work-Zone Related</p>}
-                    @if (c.PedestrianInvolved)
+                    @if (c.pedestrian_involved)
                     {<p>Pedestrian Involved</p>}
-                    @if (c.BicyclistInvolved)
+                    @if (c.bicyclist_involved)
                     {<p>Bicyclist Involved</p>}
-                    @if (c.MotorcycleInvolved)
+                    @if (c.motorcycle_involved)
                     {<p>Motorcycle Involved</p>}
-                    @if (c.ImproperRestraint)
+                    @if (c.improper_restraint)
                     {<p>Improper Restraint</p>}
-                    @if (c.Unrestrained)
+                    @if (c.unrestrained)
                     {<p>Unrestrained</p>}
-                    @if (c.Dui)
+                    @if (c.dui)
                     {<p>DUI</p>}
-                    @if (c.IntersectionRelated)
+                    @if (c.intersection_related)
                     {<p>Intersection Related</p>}
-                    @if (c.WildAnimalRelated)
+                    @if (c.wild_animal_related)
                     {<p>Wild Animal Related</p>}
-                    @if (c.DomesticAnimalRelated)
+                    @if (c.domestic_animal_related)
                     {<p>Domestic Animal Related</p>}
-                    @if (c.OverturnRollover)
+                    @if (c.overturn_rollover)
                     {<p>Overturn Rollover</p>}
-                    @if (c.CommercialMotorVehInvolved)
+                    @if (c.commercial_motor_veh_involved)
                     {<p>Commercial Motor Vehicle Involved</p>}
-                    @if (c.TeenageDriverInvolved)
+                    @if (c.teenage_driver_involved)
                     {<p>TeenageDriverInvolved</p>}
-                    @if (c.OlderDriverInvolved)
+                    @if (c.older_driver_involved)
                     {<p>Older Driver Involving</p>}
-                    @if (c.NightDarkCondition)
+                    @if (c.night_dark_condition)
                     {<p>Night Dark Condition</p>}
-                    @if (c.SingleVehicle)
+                    @if (c.single_vehicle)
                     {<p>Single Vehicle</p>}
-                    @if (c.DistractedDriving)
+                    @if (c.distracted_driving)
                     {<p>Distracted Driving</p>}
-                    @if (c.DrowsyDriving)
+                    @if (c.drowsy_driving)
                     {<p>Drowsy Driving</p>}
-                    @if (c.RoadwayDeparture)
+                    @if (c.roadway_departure)
                     {<p>Roadway Departure</p>}
                 </td>
             </tr>
@@ -111,4 +111,4 @@
 
     //public string GetEditUrl(long id) => $"/appointments/appointments/appointedit/{id}";
 
-}
+}*@

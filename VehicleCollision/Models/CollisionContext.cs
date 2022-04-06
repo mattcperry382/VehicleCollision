@@ -20,6 +20,7 @@ namespace VehicleCollision.Models
         }
 
         public DbSet<Crash> Crashes { get; set; }
+        //public DbSet<CrashSeverity> CrashSeverity { get; set; }
         //public DbSet<Order> Orders { get; set; }
 
         //        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
