@@ -11,13 +11,13 @@ namespace VehicleCollision.Models
         [Key]
         [Required]
         public int CrashId { get; set; }
-        public DateTime CrashDatetime {  get; set; }
         [Required]
+        public DateTime CrashDatetime { get; set; }
+ 
         public string Route { get; set; }
-        public float Milepoint { get; set; }
-        public float LatUtmY { get; set; }
-        public float LongUtmX { get; set; }
-        [Required]
+        public double Milepoint { get; set; }
+        public double LatUtmY { get; set; }
+        public double LongUtmX { get; set; }
         public string MainRoadName { get; set; }
         public string City { get; set; }
         public string CountyName { get; set; }
