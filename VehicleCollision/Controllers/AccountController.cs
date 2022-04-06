@@ -14,12 +14,10 @@ namespace VehicleCollision.Controllers
 {
     public class AccountController : Controller
     {
-
-        private UserManager<IdentityUser> userManager;
-        private SignInManager<IdentityUser> signInManager;
-
         //fido
         private readonly IFidoAuthentication fido;
+        private UserManager<IdentityUser> userManager;
+        private SignInManager<IdentityUser> signInManager;
 
         public AccountController(IFidoAuthentication fido, UserManager<IdentityUser> userM, SignInManager<IdentityUser> signM)
         {//
