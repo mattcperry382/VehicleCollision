@@ -23,7 +23,7 @@ namespace VehicleCollision.Controllers
         {
             var crashes = _repo.Crashes
                 .Include(x => x.CrashSeverity)
-                //.Where(x => x.CrashSeverity.Description == description || description == null)
+                //.Where(x => x.CrashSeverity.description == description || description == null)
                 .ToList();
 
             return View(crashes);

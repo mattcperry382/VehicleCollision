@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Rsk.AspNetCore.Fido;
@@ -40,14 +41,14 @@ namespace VehicleCollision.Controllers
 
         public async Task<IActionResult> Login(Account account)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 IdentityUser user = await userManager.FindByNameAsync(account.UserName);
-                if(user != null)
+                if (user != null)
                 {
                     await signInManager.SignOutAsync();
                     //potentially change false to true for lockout
-                    if((await signInManager.PasswordSignInAsync(user, account.Password, false, false)).Succeeded)
+                    if ((await signInManager.PasswordSignInAsync(user, account.Password, false, false)).Succeeded)
                     {
                         return Redirect(account?.ReturnUrl ?? "/Admin");
                     }
@@ -57,7 +58,7 @@ namespace VehicleCollision.Controllers
             return View(account);
         }
 
-        public async Task<RedirectResult> Logout(string returnUrl ="/")
+        public async Task<RedirectResult> Logout(string returnUrl = "/")
         {
             await signInManager.SignOutAsync();
             return Redirect(returnUrl);
@@ -94,5 +95,50 @@ namespace VehicleCollision.Controllers
             if (result.IsError) return BadRequest(result.ErrorDescription);
             return Ok();
         }
+        //pulls up authenticator requirment
+        public async Task<IActionResult> Authen()
+        {
+            var result = await HttpContext.AuthenticateAsync(IdentityConstants.TwoFactorUserIdScheme);
+            if (result.Succeeded)
+            {
+                var claims = result.Principal.Claims.ToList();
+                string userName = claims.FirstOrDefault(c => c.Type == "userName")?.Value;
+
+                var challenge = await _fido.InitiateAuthentication(userName);
+
+                return View(challenge.ToBase64Dto());
+
+            }
+            return new RedirectResult("/Home/Error");
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CompleteLogin(
+           [FromBody] Base64FidoAuthenticationResponse authenticationResponse)
+        {
+            var authenticationResult = await _fido.CompleteAuthentication(authenticationResponse.ToFidoResponse());
+
+            if (authenticationResult.IsSuccess)
+            {
+                var result = await HttpContext.AuthenticateAsync(IdentityConstants.TwoFactorUserIdScheme);
+
+                var claims = result.Principal.Claims.ToList();
+                string rememberMeClaim = claims.FirstOrDefault(c => c.Type == "rememberme")?.Value;
+                bool rememberMe = bool.Parse(rememberMeClaim ?? "false");
+                string userName = claims.FirstOrDefault(c => c.Type == "userName")?.Value;
+
+                var user = await userManager.FindByNameAsync(userName);
+                await signInManager.SignInAsync(user, rememberMe);
+            }
+
+            await HttpContext.SignOutAsync(IdentityConstants.TwoFactorUserIdScheme);
+
+            if (authenticationResult.IsError) return BadRequest(authenticationResult.ErrorDescription);
+
+            return Ok();
+
+        }
+
     }
 }
