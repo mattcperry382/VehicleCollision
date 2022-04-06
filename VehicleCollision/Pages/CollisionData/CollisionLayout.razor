@@ -1,14 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@inherits LayoutComponentBase
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - VehicleCollision</title>
+    <title>VehicleCollision</title>
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="~/css/site.css" />
     @*<link rel="stylesheet" href="css/mdb.min.css" />*@
-    <link href="~/css/bootstrap5.1/bootstrap.min.css" rel="stylesheet" />
 
+    <link href="~/css/bootstrap5.1/bootstrap.min.css" rel="stylesheet" />
 
     <link rel="apple-touch-icon" href="~/img/apple-icon.png">
     <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.ico">
@@ -47,9 +50,11 @@
                             <li class="nav-item">
                                 <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/CollisionData">Collision Data</a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Account" asp-action="StartRegistration">Register New Device</a>
                             </li>
+
                             <li>
                                 <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark"> MATH </a>
                             </li>
@@ -71,7 +76,7 @@
 
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            @Body
         </main>
     </div>
 
@@ -122,24 +127,25 @@
 
                 <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
                     <h3 class="h4 pb-lg-3 text-light light-300">
-                        Our Company</h3>
-                        <ul class="list-unstyled text-light light-300">
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" href="index.html">Home</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="about.html">About Us</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="work.html">Work</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="pricing.html">Price</a>
-                            </li>
-                            <li class="pb-2">
-                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
+                        Our Company
+                    </h3>
+                    <ul class="list-unstyled text-light light-300">
+                        <li class="pb-2">
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" href="index.html">Home</a>
+                        </li>
+                        <li class="pb-2">
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="about.html">About Us</a>
+                        </li>
+                        <li class="pb-2">
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="work.html">Work</a>
+                        </li>
+                        <li class="pb-2">
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="pricing.html">Price</a>
+                        </li>
+                        <li class="pb-2">
+                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
@@ -200,19 +206,6 @@
 
     </footer>
     <!-- End Footer -->
-    <!-- Bootstrap -->
-    <script src="~/js/bootstrap.bundle.min.js"></script>
-    <!-- Load jQuery require for isotope -->
-    <script src="~/js/jquery.min.js"></script>
-    <!-- Isotope -->
-    <script src="~/js/isotope.pkgd.js"></script>
-    <!-- Templatemo -->
-    <script src="~/js/templatemo.js"></script>
-    <!-- Custom -->
-    <script src="~/js/custom.js"></script>
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>*@
-    @RenderSection("Scripts", required: false)
+   
 </body>
 </html>
