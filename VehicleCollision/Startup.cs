@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using VehicleCollision.Models;
 using VehicleCollision.Services;
 
+
 namespace VehicleCollision
 {
     public class Startup
@@ -64,13 +65,24 @@ namespace VehicleCollision
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            //SMTP EMAIL SERVICE
             services.AddTransient<IEmailSender, EmailSender>();
+            
+            services.Configure<MailKitOptions>(options =>
+            {
+                options.Host_Address = Configuration["ExternalProviders:MailKit:SMTP:Address"];
+                options.Host_Port = Convert.ToInt32(Configuration["ExternalProviders:MailKit:SMTP:Port"]);
+                options.Host_Username = Configuration["ExternalProviders:MailKit:SMTP:Account"];
+                options.Host_Password = Configuration["ExternalProviders:MailKit:SMTP:Password"];
+                options.Sender_EMail = Configuration["ExternalProviders:MailKit:SMTP:SenderEmail"];
+                options.Sender_Name = Configuration["ExternalProviders:MailKit:SMTP:SenderName"];
+            });
             //services.AddTransient<IEmailSender, YourSmsSender>();
             services.AddHsts(options =>
             {
                 options.Preload = true;
                 options.IncludeSubDomains = true;
-                options.MaxAge = TimeSpan.FromDays(365);
+                options.MaxAge = TimeSpan.FromDays(30);
             });
         }
 

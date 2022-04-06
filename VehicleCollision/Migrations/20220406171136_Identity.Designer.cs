@@ -9,7 +9,7 @@ using VehicleCollision.Models;
 namespace VehicleCollision.Migrations
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20220406022831_Identity")]
+    [Migration("20220406171136_Identity")]
     partial class Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
