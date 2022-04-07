@@ -1,14 +1,38 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@page "/admin"
+﻿@page "/admin"
+
+@model VehicleCollision.Pages.Admin.IndexModel
 
 @using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]
+@attribute [Authorize(Roles ="Administrator")]
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Collisions</title>
+    <link href="~/css/site.css" rel="stylesheet" />
+    @*<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />*@
+    <base href="/" />
 
-<hi> you made it</hi>
+</head>
 
-<div><a class="btn btn-sm btn-danger" href="/account/logout">Logout</a></div>
-@{
-}
+<body>
+    <component type="typeof(VehicleCollision.Pages.Admin.Routed)" render-mode="Server" />
+    <script src="/_framework/blazor.server.js"></script>
+    <script src="~/js/site.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <!-- Load jQuery require for isotope -->
+    <script src="~/js/jquery.min.js"></script>
+    <!-- Isotope -->
+    <script src="~/js/isotope.pkgd.js"></script>
+    <!-- Templatemo -->
+    <script src="~/js/templatemo.js"></script>
+    <!-- Custom -->
+    <script src="~/js/custom.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
+
+</body>
+</html>

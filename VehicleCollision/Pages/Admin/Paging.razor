@@ -1,0 +1,109 @@
+﻿@*<h3>Paging</h3>*@
+
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using VehicleCollision.Models.ViewModels
+@using VehicleCollision.Components
+
+<div class="btn-group pull-right m-1">@((MarkupString)CreatePaging())</div>
+
+@code {
+    [Parameter]
+    public PageInfo PI { get; set; }
+
+
+    [Parameter]
+    public bool PageClassesEnabled { get; set; } = false;
+
+    [Parameter]
+    public string PageClass { get; set; }
+
+    [Parameter]
+    public string PageClassSelected { get; set; }
+
+
+    //public CrashSeverityViewComponent(ICollisionRepository temp)
+    //{
+    //    _repo = temp;
+    //}
+
+    //    public IViewComponentResult Invoke()
+    //    {
+    //        ViewBag.SelectCrashSeverity = RouteData?.Values["severity"];
+
+    //        var crashseverity = _repo.CrashSeverity
+    //        .Select(x => x.Description)
+    //        .Distinct()
+    //        .OrderBy(x => x);
+    //        return View(crashseverity);
+    //    }
+
+
+    public string CreatePaging()
+    {
+        TagBuilder result = new TagBuilder("div");
+        string anchorInnerHtml = "";
+
+        for (int i = 1; i <= PI.TotalNumCrashes; i++)
+        {
+            TagBuilder tag = new TagBuilder("a");
+            anchorInnerHtml = AnchorInnerHtml(i, PI);
+
+            if (anchorInnerHtml == "..")
+                tag.Attributes["href"] = "/admin";
+            else if (i == 1)
+                tag.Attributes["href"] = "/admin";
+            else
+                tag.Attributes["href"] = "/collisions/" + i;
+
+            if (PageClassesEnabled)
+            {
+                tag.AddCssClass(PageClass);
+                tag.AddCssClass(i == PI.CurrentPage ? PageClassSelected : "");
+            }
+
+            tag.InnerHtml.Append(anchorInnerHtml);
+
+            if (anchorInnerHtml != "")
+                result.InnerHtml.AppendHtml(tag);
+        }
+
+        System.IO.StringWriter writer = new System.IO.StringWriter();
+        result.InnerHtml.WriteTo(writer, System.Text.Encodings.Web.HtmlEncoder.Default);
+        return writer.ToString();
+    }
+
+    public static string AnchorInnerHtml(int i, PageInfo pagingInfo)
+    {
+        string anchorInnerHtml = "";
+        if (pagingInfo.TotalPages <= 10)
+            anchorInnerHtml = i.ToString();
+        else
+        {
+            if (pagingInfo.CurrentPage <= 5)
+            {
+                if ((i <= 8) || (i == pagingInfo.TotalPages))
+                    anchorInnerHtml = i.ToString();
+                else if (i == pagingInfo.TotalPages - 1)
+                    anchorInnerHtml = "..";
+            }
+            else if ((pagingInfo.CurrentPage > 5) && (pagingInfo.TotalPages - pagingInfo.CurrentPage >= 5))
+            {
+                if ((i == 1) || (i == pagingInfo.TotalPages) || ((pagingInfo.CurrentPage - i >= -3) && (pagingInfo.CurrentPage - i <= 3)))
+                    anchorInnerHtml = i.ToString();
+                else if ((i == pagingInfo.CurrentPage - 4) || (i == pagingInfo.CurrentPage + 4))
+                    anchorInnerHtml = "..";
+            }
+            else if (pagingInfo.TotalPages - pagingInfo.CurrentPage < 5)
+            {
+                if ((i == 1) || (pagingInfo.TotalPages - i <= 7))
+                    anchorInnerHtml = i.ToString();
+                else if (pagingInfo.TotalPages - i == 8)
+                    anchorInnerHtml = "..";
+            }
+        }
+        return anchorInnerHtml;
+    }
+}
+@code {
+
+}

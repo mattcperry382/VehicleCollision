@@ -1,0 +1,228 @@
+﻿@page "/admin/collisions/edit/{id:long}"
+@page "/admin/collisions/create"
+@inherits OwningComponentBase<ICollisionRepository>
+
+<style>
+    div.validation-message {color: rgb(220,53,69); font-weight: 500;}
+</style>
+
+<h3 class="bg-@ThemeColor text-white text-center p-1">@TitleText Collision</h3>
+
+<EditForm Model="c" OnValidSubmit="SaveCrash">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    @if (c.CrashId != 0)
+    {
+        <div class="form-group">
+            <label>Crash ID</label>
+            <input type="number" class="form-control" disabled value="@c.CrashId" />
+        </div>
+    }
+    <div class="form-group">
+        <label>CrashDatetime</label>
+        <ValidationMessage For="@(() => c.CrashDatetime)"></ValidationMessage>
+        <InputDate class="form-control" @bind-Value="@c.CrashDatetime"></InputDate>
+</div>
+    <div class="form-group">
+        <label>Route</label>
+        <ValidationMessage For="@(() => c.Route)"></ValidationMessage>
+        <InputText class="form-control" @bind-Value="c.Route"></InputText>
+    </div>
+    <div class="form-group">
+        <label>Milepoint</label>
+        <ValidationMessage For="@(() => c.Milepoint)"></ValidationMessage>
+        <InputNumber class="form-control" @bind-Value="c.Milepoint"></InputNumber>
+    </div>
+    <div class="form-group">
+        <label>Latitude</label>
+        <ValidationMessage For="@(() => c.LatUtmY)"></ValidationMessage>
+        <InputNumber class="form-control" @bind-Value="c.LatUtmY"></InputNumber>
+    </div>
+    <div class="form-group">
+        <label>Longitude</label>
+        <ValidationMessage For="@(() => c.LongUtmX)"></ValidationMessage>
+        <InputNumber class="form-control" @bind-Value="c.LongUtmX"></InputNumber>
+    </div>
+    <div class="form-group">
+        <label>Main Road Name</label>
+        <ValidationMessage For="@(() => c.MainRoadName)"></ValidationMessage>
+        <InputText class="form-control" @bind-Value="c.MainRoadName"></InputText>
+    </div>
+    <div class="form-group">
+        <label>City</label>
+        <ValidationMessage For="@(() => c.City)"></ValidationMessage>
+        <InputText class="form-control" @bind-Value="c.City"></InputText>
+    </div>
+    <div class="form-group">
+        <label>County Name</label>
+        <ValidationMessage For="@(() => c.CountyName)"></ValidationMessage>
+        <InputText class="form-control" @bind-Value="c.CountyName"></InputText>
+    </div>
+
+    ADD IN CRASH SEVERITY SELECT
+    @*<div class="form-group">
+            <label>Crash Severity</label>
+            <ValidationMessage For="@(() => c.CrashSeverity)"></ValidationMessage>
+
+            <InputSelect class="form-select" @bind-Value="c.CrashSeverity">
+
+            @foreach (var cs in CrashData)
+            {
+                <option value="@cs.CrashSeverityId">@cs.Description</option>
+            }
+
+            </InputSelect>
+        </div>*@
+    <div class="container form-check">
+        <div class="row justify-content-md-center">
+            <div class="form-group col">
+                <label class="form-check-label">Work Zone Related</label>
+                <ValidationMessage For="@(() => c.WorkZoneRelated)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.WorkZoneRelated" @bind-value="@c.WorkZoneRelated" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Pedestrian Involved</label>
+                <ValidationMessage For="@(() => c.PedestrianInvolved)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.PedestrianInvolved" @bind-value="@c.PedestrianInvolved" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Bicyclist Involved</label>
+                <ValidationMessage For="@(() => c.BicyclistInvolved)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.BicyclistInvolved" @bind-value="@c.BicyclistInvolved" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Motorcycle Involved</label>
+                <ValidationMessage For="@(() => c.MotorcycleInvolved)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.MotorcycleInvolved" @bind-value="@c.MotorcycleInvolved" />
+            </div>
+            
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="form-group col">
+                <label class="form-check-label">Improper Restraint</label>
+                <ValidationMessage For="@(() => c.ImproperRestraint)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.ImproperRestraint" @bind-value="@c.ImproperRestraint" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Unrestrained</label>
+                <ValidationMessage For="@(() => c.Unrestrained)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.Unrestrained" @bind-value="@c.Unrestrained" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">DUI</label>
+                <ValidationMessage For="@(() => c.Dui)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.Dui" @bind-value="@c.Dui" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Intersection Related</label>
+                <ValidationMessage For="@(() => c.IntersectionRelated)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.IntersectionRelated" @bind-value="@c.IntersectionRelated" />
+            </div>
+            
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="form-group col">
+                <label class="form-check-label">Wild Animal Related</label>
+                <ValidationMessage For="@(() => c.WildAnimalRelated)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.WildAnimalRelated" @bind-value="@c.WildAnimalRelated" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Domestic Animal Related</label>
+                <ValidationMessage For="@(() => c.DomesticAnimalRelated)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.DomesticAnimalRelated" @bind-value="@c.DomesticAnimalRelated" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Overturn Rollover</label>
+                <ValidationMessage For="@(() => c.OverturnRollover)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.OverturnRollover" @bind-value="@c.OverturnRollover" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Commercial Vehicle Involved</label>
+                <ValidationMessage For="@(() => c.CommercialMotorVehInvolved)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.CommercialMotorVehInvolved" @bind-value="@c.CommercialMotorVehInvolved" />
+            </div>
+            
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="form-group col">
+                <label class="form-check-label">Teenage Driver Involved</label>
+                <ValidationMessage For="@(() => c.TeenageDriverInvolved)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.TeenageDriverInvolved" @bind-value="@c.TeenageDriverInvolved" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Older Driver Involved</label>
+                <ValidationMessage For="@(() => c.OlderDriverInvolved)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.OlderDriverInvolved" @bind-value="@c.OlderDriverInvolved" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Night/Dark Condition</label>
+                <ValidationMessage For="@(() => c.NightDarkCondition)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.NightDarkCondition" @bind-value="@c.NightDarkCondition" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Single Vehicle</label>
+                <ValidationMessage For="@(() => c.SingleVehicle)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.SingleVehicle" @bind-value="@c.SingleVehicle" />
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="form-group col">
+                <label class="form-check-label">Distracted Driving</label>
+                <ValidationMessage For="@(() => c.DistractedDriving)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.DistractedDriving" @bind-value="@c.DistractedDriving" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Drowsy Driving</label>
+                <ValidationMessage For="@(() => c.DrowsyDriving)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.DrowsyDriving" @bind-value="@c.DrowsyDriving" />
+            </div>
+            <div class="form-group col">
+                <label class="form-check-label">Roadway Departure</label>
+                <ValidationMessage For="@(() => c.RoadwayDeparture)"></ValidationMessage>
+                <input class="form-check-input" type="checkbox" checked="@c.RoadwayDeparture" @bind-value="@c.RoadwayDeparture" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-@ThemeColor">Save</button>
+    <NavLink class="btn btn-secondary" href="/admin/collisions">Back</NavLink>
+</EditForm>
+
+@code {
+    [Parameter]
+    public long Id { get; set; } = 0;
+
+    public string ThemeColor => Id == 0 ? "primary" : "warning";
+    public string TitleText => Id == 0 ? "Create" : "Edit";
+
+    public IEnumerable<CrashSeverity> CrashData { get; set; }
+    public Crash c { get; set; } = new Crash();
+
+    public ICollisionRepository repo => Service;
+
+    protected override void OnParametersSet()
+    {
+        if (Id != 0) // existing collision
+        {
+            c = repo.Crashes.Include(x=>x.CrashSeverity).FirstOrDefault(x => x.CrashId == Id);
+            CrashData = repo.CrashSeverity.ToList();
+        }
+    }
+
+    public void SaveCrash()
+    {
+        if (Id == 0)
+        {
+            repo.CreateCrash(c);
+        }
+        else
+        {
+            repo.SaveCrash(c);
+        }
+
+        NavManager.NavigateTo("/admin/collisions");
+    }
+
+
+    [Inject]
+    public NavigationManager NavManager { get; set; }
+}

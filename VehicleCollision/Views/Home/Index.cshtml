@@ -1,8 +1,6 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
-
-@model List<Crash>
 
 
  <!-- Start Banner Hero -->
@@ -20,7 +18,7 @@
                     <div class="carousel-item active">
 
                         <div class="py-5 row d-flex align-items-center">
-                            <div class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5 pb-5 bg-light bg-gradient opacity-75 rounded-1">
+                            <div class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5 pb-5 bg-light bg-gradient">
                                 <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-5 mx-0 px-0 light-300 typo-space-line">
                                     Stop <strong>Crashes</strong> 
                               </h1>
@@ -28,7 +26,7 @@
                                     The Utah Motor Vehicle Collision site is dedicated to helping Utah drive safer.
 
                               </p>
-                                <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
+                                <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">About Us</a>
                             </div>
                         </div>
 
@@ -45,7 +43,7 @@
                                     We have the latest data available for vehicle collisions in Utah
 
                                 </p>
-                                <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
+                                <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" asp-controller="Home" asp-action="CollisionData" role="button">View Data</a>
                             </div>
                         </div>
 
@@ -55,12 +53,12 @@
                         <div class="py-5 row d-flex align-items-center">
                             <div class="banner-content col-lg-8 col-8 offset-2 m-lg-auto text-left py-5 pb-5 bg-light bg-gradient">
                                 <h1 class="banner-heading h1 text-secondary display-3 mb-0 pb-3 mx-0 px-0 light-300">
-                                   Yeet on the slopes not in the car
+                                   Yeet On The Slopes NOT in the Car
                                 </h1>
                                 <p class="banner-body text-muted py-3">
                                     1,000s of people die each year by being ejected from the car. Wear a seat belt make others who ride with you do the same.
                                 </p>
-                                <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Get Started</a>
+                                <a class="banner-button btn rounded-pill btn-outline-primary btn-lg px-4" href="#" role="button">Data Analytics</a>
                             </div>
                         </div>
 
@@ -80,80 +78,3 @@
         </div>
     </div>
     <!-- End Banner Hero -->
-
-
-@*backup data*@
-@*<h1>Collisions</h1>
-
-<table class="table table-responsive table-striped table-bordered">
-    <thead class="thead-dark">
-        <tr>
-            <td>ID</td>
-            <td>Date/Time</td>
-            <td>Route</td>
-            <td>Milepoint</td>
-            <td>Location (lat/long)</td>
-            <td>Road Name</td>
-            <td>City</td>
-            <td>County</td>
-            <td>Crash Severity</td>
-            <td>Tags</td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var c in Model)
-        {
-            <tr>
-                <td>@c.CrashId</td>
-                <td>@c.CrashDatetime</td>
-                <td>@c.Route</td>
-                <td>@c.Milepoint</td>
-                <td>@c.LatUtmY, @c.LongUtmX</td>
-                <td>@c.MainRoadName</td>
-                <td>@c.City</td>
-                <td>@c.CountyName</td>
-                <td>@c.CrashSeverity.Description</td>
-                <td>
-                    @if (c.WorkZoneRelated)
-                    {<p>Work-Zone Related</p>}
-                    @if (c.PedestrianInvolved)
-                    {<p>Pedestrian Involved</p>}
-                    @if (c.BicyclistInvolved)
-                    {<p>Bicyclist Involved</p>}
-                    @if (c.MotorcycleInvolved)
-                    {<p>Motorcycle Involved</p>}
-                    @if (c.ImproperRestraint)
-                    {<p>Improper Restraint</p>}
-                    @if (c.Unrestrained)
-                    {<p>Unrestrained</p>}
-                    @if (c.Dui)
-                    {<p>DUI</p>}
-                    @if (c.IntersectionRelated)
-                    {<p>Intersection Related</p>}
-                    @if (c.WildAnimalRelated)
-                    {<p>Wild Animal Related</p>}
-                    @if (c.DomesticAnimalRelated)
-                    {<p>Domestic Animal Related</p>}
-                    @if (c.OverturnRollover)
-                    {<p>Overturn Rollover</p>}
-                    @if (c.CommercialMotorVehInvolved)
-                    {<p>Commercial Motor Vehicle Involved</p>}
-                    @if (c.TeenageDriverInvolved)
-                    {<p>TeenageDriverInvolved</p>}
-                    @if (c.OlderDriverInvolved)
-                    {<p>Older Driver Involving</p>}
-                    @if (c.NightDarkCondition)
-                    {<p>Night Dark Condition</p>}
-                    @if (c.SingleVehicle)
-                    {<p>Single Vehicle</p>}
-                    @if (c.DistractedDriving)
-                    {<p>Distracted Driving</p>}
-                    @if (c.DrowsyDriving)
-                    {<p>Drowsy Driving</p>}
-                    @if (c.RoadwayDeparture)
-                    {<p>Roadway Departure</p>}
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>*@
