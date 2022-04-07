@@ -45,6 +45,7 @@ namespace VehicleCollision
                 options.Password.RequiredUniqueChars = 1;
                 options.Password.RequireNonAlphanumeric = false;
                 options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedEmail = true;
 
 
             }).AddRoles<IdentityRole>().AddEntityFrameworkStores<IdentityContext>()
