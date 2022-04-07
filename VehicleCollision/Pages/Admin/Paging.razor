@@ -2,6 +2,7 @@
 
 @using Microsoft.AspNetCore.Mvc.Rendering;
 @using VehicleCollision.Models.ViewModels
+@using VehicleCollision.Components
 
 <style>
     .pagingDiv {
@@ -45,6 +46,7 @@
     [Parameter]
     public PageInfo PI { get; set; }
 
+
     [Parameter]
     public bool PageClassesEnabled { get; set; } = false;
 
@@ -53,6 +55,24 @@
 
     [Parameter]
     public string PageClassSelected { get; set; }
+
+
+    //public CrashSeverityViewComponent(ICollisionRepository temp)
+    //{
+    //    _repo = temp;
+    //}
+
+    //    public IViewComponentResult Invoke()
+    //    {
+    //        ViewBag.SelectCrashSeverity = RouteData?.Values["severity"];
+
+    //        var crashseverity = _repo.CrashSeverity
+    //        .Select(x => x.Description)
+    //        .Distinct()
+    //        .OrderBy(x => x);
+    //        return View(crashseverity);
+    //    }
+
 
     public string CreatePaging()
     {
