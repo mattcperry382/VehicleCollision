@@ -5,6 +5,12 @@
 @inherits OwningComponentBase<ICollisionRepository>
 @using VehicleCollision.Models.ViewModels 
 
+
+<h1>Collisions</h1>
+
+<NavLink class="btn btn-primary" href="/admin/collisions/create">Create</NavLink>
+
+
 @*<div class="row m-1 p-1">
     <div id="crashseverity" class="col-2">
         <h5 class="text-center">Collision Severity</h5>
@@ -125,6 +131,7 @@
                     }
                 }
                 else if (Crashes?.Count() == 0)
+
                 {
                     <tr><td colspan="14" class="text-secondary text-center font-weight-bold">No Collisions</td></tr>
                 }
@@ -228,5 +235,3 @@
                 Crashes = AllCrashes.Skip(skip).Take(PageSize).ToList();
             }
         }
-
-
