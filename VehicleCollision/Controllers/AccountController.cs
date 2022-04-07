@@ -14,17 +14,18 @@ namespace VehicleCollision.Controllers
 {
     public class AccountController : Controller
     {
+        //fido
+        private readonly IFidoAuthentication fido;
 
+        //identity
         private UserManager<IdentityUser> userManager;
         private SignInManager<IdentityUser> signInManager;
 
-        //fido
-        private readonly IFidoAuthentication _fido;
-
         public AccountController(IFidoAuthentication fido, UserManager<IdentityUser> userM, SignInManager<IdentityUser> signM)
-        {//
+        {//fido still doesn't work
 
-            _fido = fido;
+            this.fido = fido;
+         
             userManager = userM;
             signInManager = signM;
         }
@@ -36,9 +37,9 @@ namespace VehicleCollision.Controllers
                 ReturnUrl = returnUrl
             });
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Login(Account account)
         {
             if (ModelState.IsValid)
@@ -64,6 +65,10 @@ namespace VehicleCollision.Controllers
             return Redirect(returnUrl);
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
 
         //FIDO STUFF
@@ -81,7 +86,7 @@ namespace VehicleCollision.Controllers
         {
             //init regis process and challenge device
             //change user name to different value. See vid 745min
-            var challenge = await _fido.InitiateRegistration(User.Identity.Name, model.Device);
+            var challenge = await fido.InitiateRegistration(User.Identity.Name, model.Device);
 
             return View(challenge.ToBase64Dto());
         }
@@ -90,11 +95,12 @@ namespace VehicleCollision.Controllers
         public async Task<IActionResult> CompleteRegistration(
             [FromBody] Base64FidoRegistrationResponse registrationResponse)
         {
-            var result = await _fido.CompleteRegistration(registrationResponse.ToFidoResponse());
+            var result = await fido.CompleteRegistration(registrationResponse.ToFidoResponse());
 
             if (result.IsError) return BadRequest(result.ErrorDescription);
             return Ok();
         }
+
         //pulls up authenticator requirment
         public async Task<IActionResult> Authen()
         {
@@ -104,7 +110,7 @@ namespace VehicleCollision.Controllers
                 var claims = result.Principal.Claims.ToList();
                 string userName = claims.FirstOrDefault(c => c.Type == "userName")?.Value;
 
-                var challenge = await _fido.InitiateAuthentication(userName);
+                var challenge = await fido.InitiateAuthentication(userName);
 
                 return View(challenge.ToBase64Dto());
 
@@ -117,7 +123,7 @@ namespace VehicleCollision.Controllers
         public async Task<IActionResult> CompleteLogin(
            [FromBody] Base64FidoAuthenticationResponse authenticationResponse)
         {
-            var authenticationResult = await _fido.CompleteAuthentication(authenticationResponse.ToFidoResponse());
+            var authenticationResult = await fido.CompleteAuthentication(authenticationResponse.ToFidoResponse());
 
             if (authenticationResult.IsSuccess)
             {

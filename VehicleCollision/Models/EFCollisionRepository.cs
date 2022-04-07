@@ -13,7 +13,8 @@ namespace VehicleCollision.Models
             context = temp;
         }
         public IQueryable<Crash> Crashes => context.Crashes;
-        //public IQueryable<CrashSeverity> CrashSeverity => context.CrashSeverity;
+
+        public IQueryable<CrashSeverity> CrashSeverity => context.CrashSeverity;
 
         public void SaveCrash(Crash c)
         {

@@ -1,0 +1,103 @@
+﻿@page "/admin/collisions/details/{id:long}"
+
+<h3 class="bg-info text-white text-center p-1">Details</h3>
+
+<table class="table table-sm table-bordered table-striped">
+    <tr>
+        <th>Crash ID</th>
+        <td>@c.CrashId</td>
+    </tr>
+    <tr>
+        <th>Crash Date/Time</th>
+        <td>@c.CrashDatetime</td>
+    </tr>
+    <tr>
+        <th>Route</th>
+        <td>@c.Route</td>
+    </tr>
+    <tr>
+        <th>Milepoint</th>
+        <td>@c.Milepoint</td>
+    </tr>
+    <tr>
+        <th>Location (lat/long)</th>
+        <td>@c.LatUtmY, @c.LongUtmX</td>
+    </tr>
+    <tr>
+        <th>Main Road Name</th>
+        <td>@c.MainRoadName</td>
+    </tr>
+    <tr>
+        <th>City</th>
+        <td>@c.City</td>
+    </tr>
+    <tr>
+        <th>County Name</th>
+        <td>@c.CountyName</td>
+    </tr>
+    <tr>
+        <th>Crash Severity</th>
+        <td>@c.CrashSeverity.Description</td>
+    </tr>
+    <tr>
+        <th>Tags</th>
+        <td>
+            @if (c.WorkZoneRelated)
+            {<p>Work-Zone Related</p>}
+            @if (c.PedestrianInvolved)
+            {<p>Pedestrian Involved</p>}
+            @if (c.BicyclistInvolved)
+            {<p>Bicyclist Involved</p>}
+            @if (c.MotorcycleInvolved)
+            {<p>Motorcycle Involved</p>}
+            @if (c.ImproperRestraint)
+            {<p>Improper Restraint</p>}
+            @if (c.Unrestrained)
+            {<p>Unrestrained</p>}
+            @if (c.Dui)
+            {<p>DUI</p>}
+            @if (c.IntersectionRelated)
+            {<p>Intersection Related</p>}
+            @if (c.WildAnimalRelated)
+            {<p>Wild Animal Related</p>}
+            @if (c.DomesticAnimalRelated)
+            {<p>Domestic Animal Related</p>}
+            @if (c.OverturnRollover)
+            {<p>Overturn Rollover</p>}
+            @if (c.CommercialMotorVehInvolved)
+            {<p>Commercial Motor Vehicle Involved</p>}
+            @if (c.TeenageDriverInvolved)
+            {<p>TeenageDriverInvolved</p>}
+            @if (c.OlderDriverInvolved)
+            {<p>Older Driver Involving</p>}
+            @if (c.NightDarkCondition)
+            {<p>Night Dark Condition</p>}
+            @if (c.SingleVehicle)
+            {<p>Single Vehicle</p>}
+            @if (c.DistractedDriving)
+            {<p>Distracted Driving</p>}
+            @if (c.DrowsyDriving)
+            {<p>Drowsy Driving</p>}
+            @if (c.RoadwayDeparture)
+            {<p>Roadway Departure</p>}
+        </td>
+    </tr>
+</table>
+
+<NavLink class="btn btn-warning" href="@EditUrl">Edit</NavLink>
+<NavLink class="btn btn-secondary" href="/admin/collisions">Back</NavLink>
+
+@code {
+    [Inject]
+    public ICollisionRepository repo { get; set; }
+    [Parameter]
+    public long Id { get; set; }
+    public Crash c { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        c = repo.Crashes.Include(x =>x.CrashSeverity).FirstOrDefault(x => x.CrashId == Id);
+    }
+
+    public string EditUrl => $"/admin/collisions/edit/{c.CrashId}";
+}

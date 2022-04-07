@@ -1,12 +1,22 @@
-﻿@page "/CollisionData"
-
-@using VehicleCollision.Models
-@inherits OwningComponentBase<ICollisionRepository>
-@{
+﻿@{
+    ViewData["Title"] = "Collision Data";
 }
 
-<h1>Collisions</h1>
+@model CrashesViewModel
 
+<div class="row m-1 p-1">
+    <div id="crashseverity" class="col-2">
+        <h5 class="text-center">Collision Severity</h5>
+        <vc:crash-severity></vc:crash-severity>
+
+    </div>
+
+    <div class="col-10">
+        <h1>Collisions</h1>
+        <div page-number="@Model.PageInfo" page-action="CollisionData" page-class-enabled="true" page-class="btn"
+             page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+
+        <div></div>
 
 <table class="table table-responsive table-striped table-bordered">
     <thead class="thead-dark">
@@ -24,9 +34,8 @@
         </tr>
     </thead>
     <tbody>
-        @if (Crashes?.Count() > 0)
-        {
-        @foreach (Crash c in Crashes)
+       
+        @foreach (var c in Model.Crashes)
         {
             <tr>
                 <td>@c.CrashId</td>
@@ -79,43 +88,15 @@
                     {<p>Roadway Departure</p>}
                 </td>
             </tr>
-        }}
-        else
-            {
-                <tr><td colspan="10" class="text-secondary text-center font-weight-bold">No Collisions</td></tr>
-            }
+        }
     </tbody>
 </table>
 
+        <div page-number="@Model.PageInfo" page-action="CollisionData" page-class-enabled="true" page-class="btn"
+             page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
 
-@code {
-    public ICollisionRepository repo => Service;
-
-    public IEnumerable<Crash> Crashes { get; set; }
-
-    protected async override Task OnInitializedAsync()
-    {
-
-        await UpdateData();
-    }
-
-    public async Task UpdateData()
-    {
-        Crashes = await repo.Crashes
-        .Include(x =>x.CrashSeverity)
-        .ToListAsync();
-    }
-
-    //public async Task DeleteAppointment(Appointment a)
-    //{
+    </div>
+</div>
 
 
-    //    var timeSlot = repo.TimeSlots.FirstOrDefault(x => x.TimeSlotId == a.TimeSlotId);
-    //    timeSlot.Taken = false;
-    //    repo.DeleteAppoint(a);
-    //    await UpdateData();
-    //}
 
-    //public string GetEditUrl(long id) => $"/appointments/appointments/appointedit/{id}";
-
-}

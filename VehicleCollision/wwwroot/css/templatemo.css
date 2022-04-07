@@ -36,12 +36,12 @@ p, a {font-weight: 400;}
 }
 .typo-space-line::after,
 .typo-space-line-center::after {
-  content: "";
-  width: 150px;
-  display:block;
-  position: absolute;
-  border-bottom:  5px solid #ffffff;
-  padding-top: .5em;
+	content: "";
+	width: 150px;
+	display: block;
+	position: absolute;
+	border-bottom: 5px solid #6266ea;
+	padding-top: .5em;
 }
 .typo-space-line-center::after {
   left: 50%;
