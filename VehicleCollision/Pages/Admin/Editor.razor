@@ -10,11 +10,13 @@
 
 <EditForm Model="c" OnValidSubmit="SaveCrash">
     <DataAnnotationsValidator></DataAnnotationsValidator>
-
-    <div class="form-group">
-        <label>Crash ID</label>
-        <input type="number" class="form-control" disabled value="@c.CrashId" />
-    </div>
+    @if (c.CrashId != 0)
+    {
+        <div class="form-group">
+            <label>Crash ID</label>
+            <input type="number" class="form-control" disabled value="@c.CrashId" />
+        </div>
+    }
     <div class="form-group">
         <label>CrashDatetime</label>
         <ValidationMessage For="@(() => c.CrashDatetime)"></ValidationMessage>
@@ -55,6 +57,7 @@
         <ValidationMessage For="@(() => c.CountyName)"></ValidationMessage>
         <InputText class="form-control" @bind-Value="c.CountyName"></InputText>
     </div>
+
     ADD IN CRASH SEVERITY SELECT
     @*<div class="form-group">
         <label>Crash Severity</label>
@@ -68,7 +71,6 @@
         }
 
         </InputSelect>
-
     </div>*@
     <div class="form-group">
         <label>Work Zone Related</label>
@@ -177,6 +179,7 @@
     public string ThemeColor => Id == 0 ? "primary" : "warning";
     public string TitleText => Id == 0 ? "Create" : "Edit";
 
+    public IEnumerable<CrashSeverity> CrashData { get; set; }
     public Crash c { get; set; } = new Crash();
 
     public ICollisionRepository repo => Service;
@@ -189,7 +192,6 @@
         {
             c = repo.Crashes.Include(x=>x.CrashSeverity).FirstOrDefault(x => x.CrashId == Id);
             CrashData = repo.CrashSeverity.ToList();
-
         }
     }
 
@@ -206,6 +208,7 @@
 
         NavManager.NavigateTo("/admin/collisions");
     }
+
 
     [Inject]
     public NavigationManager NavManager { get; set; }
