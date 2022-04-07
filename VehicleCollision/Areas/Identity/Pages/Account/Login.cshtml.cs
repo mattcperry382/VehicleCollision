@@ -96,11 +96,21 @@ namespace VehicleCollision.Areas.Identity.Pages.Account
                     _logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
+              
                 else
                 {
+                    //Informs user if Email is not confirmed
+                    var user = await _userManager.FindByNameAsync(Input.Email.TrimEnd());
+                    bool emailStatus = await _userManager.IsEmailConfirmedAsync(user);
+                    if (emailStatus == false)
+                    {
+                        ModelState.AddModelError(nameof(Input.Email), "Email is unconfirmed, please confirm it first");
+                    }
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return Page();
+                    
                 }
+
             }
 
             // If we got this far, something failed, redisplay form

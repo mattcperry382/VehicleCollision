@@ -1,4 +1,7 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,21 +48,34 @@
                                 <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             @*<li class="nav-item">
-            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </li>*@
+                                <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>*@
                             <li class="nav-item">
                                 <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="CollisionData">Collision Data</a>
                             </li>
                             @*Fido registration button. Incomplete right now
-            <li class="nav-item">
-            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Account" asp-action="StartRegistration">Register New Device</a>
-        </li>*@
+                            <li class="nav-item">
+                                <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Account" asp-action="StartRegistration">Register New Device</a>
+                            </li>*@
                             <li>
                                 <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark">Data Analytics</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                             </li>
                             <li>
                                 <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin">Admin</a>
                             </li>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Community">Community</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin">Admin</a>
+                                </li>
+                            }
+                            else { }
                         </ul>
                     </div>
                     <div class="navbar align-self-center d-flex">
