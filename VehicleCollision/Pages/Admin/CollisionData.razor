@@ -150,84 +150,84 @@
     @*</div>
 </div>*@
 
-        @code {
-            public ICollisionRepository repo => Service;
-            public int i { get; set; }
-            public IEnumerable<Crash> Crashes { get; set; }
+@code {
+    public ICollisionRepository repo => Service;
+    public int i { get; set; }
+    public IEnumerable<Crash> Crashes { get; set; }
 
-            public string Filter { get; set; }
+    public string Filter { get; set; }
 
-            public bool IsVisible(Crash crash)
-            {
-                if (string.IsNullOrEmpty(Filter))
-                    return true;
+    public bool IsVisible(Crash crash)
+    {
+        if (string.IsNullOrEmpty(Filter))
+            return true;
 
-                if (crash.CountyName.Contains(Filter, StringComparison.OrdinalIgnoreCase))
-                    return true;
+        if (crash.CountyName.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+            return true;
 
-                if (crash.City.Contains(Filter, StringComparison.OrdinalIgnoreCase))
-                    return true;
-
-
-                if (crash.MainRoadName.Contains(Filter, StringComparison.OrdinalIgnoreCase))
-                    return true;
+        if (crash.City.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+            return true;
 
 
-                if (crash.Route.Contains(Filter, StringComparison.OrdinalIgnoreCase))
-                    return true;
+        if (crash.MainRoadName.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+            return true;
 
-                if (crash.CrashSeverity.Description.Contains(Filter, StringComparison.OrdinalIgnoreCase))
-                    return true;
 
-                //if (crash.CrashSeverity.Description.ToString().StartsWith(Filter) || crash.CrashSeverity.Description.ToString().StartsWith(Filter))
-                //    return true;
+        if (crash.Route.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+            return true;
 
-                return false;
-            }
+        if (crash.CrashSeverity.Description.Contains(Filter, StringComparison.OrdinalIgnoreCase))
+            return true;
 
-            protected async override Task OnInitializedAsync()
-            {
+        //if (crash.CrashSeverity.Description.ToString().StartsWith(Filter) || crash.CrashSeverity.Description.ToString().StartsWith(Filter))
+        //    return true;
 
-                await UpdateData();
-            }
+        return false;
+    }
 
-            public async Task UpdateData()
-            {
-                Crashes = await repo.Crashes
-                .Include(x => x.CrashSeverity)
-                .ToListAsync();
-            }
+    protected async override Task OnInitializedAsync()
+    {
 
-            public string GetDetailsUrl(long id) => $"admin/collisions/details/{id}";
-            public string GetEditUrl(long id) => $"admin/collisions/edit/{id}";
-            public async Task RemoveCrash(Crash c)
-            {
-                repo.DeleteCrash(c);
-                await UpdateData();
-            }
+        await UpdateData();
+    }
 
-            [Parameter]
-            public int page { get; set; }
+    public async Task UpdateData()
+    {
+        Crashes = await repo.Crashes
+        .Include(x => x.CrashSeverity)
+        .ToListAsync();
+    }
 
-            PageInfo pagingInfo = new PageInfo();
+    public string GetDetailsUrl(long id) => $"admin/collisions/details/{id}";
+    public string GetEditUrl(long id) => $"admin/collisions/edit/{id}";
+    public async Task RemoveCrash(Crash c)
+    {
+        repo.DeleteCrash(c);
+        await UpdateData();
+    }
 
-            protected override void OnParametersSet()
-            {
-                CreatePagingInfo();
-            }
+    [Parameter]
+    public int page { get; set; }
 
-            public void CreatePagingInfo()
-            {
-                var AllCrashes = repo.Crashes.Include(c => c.CrashSeverity);
+    PageInfo pagingInfo = new PageInfo();
 
-                int PageSize = 25;
-                pagingInfo = new PageInfo();
-                page = page == 0 ? 1 : page;
-                pagingInfo.CurrentPage = page;
-                pagingInfo.TotalNumCrashes = AllCrashes.Count();
-                pagingInfo.CrashesPerPage = PageSize;
+    protected override void OnParametersSet()
+    {
+        CreatePagingInfo();
+    }
 
-                var skip = PageSize * (Convert.ToInt32(page) - 1);
-                Crashes = AllCrashes.Skip(skip).Take(PageSize).ToList();
-            }
-        }
+    public void CreatePagingInfo()
+    {
+        var AllCrashes = repo.Crashes.Include(c => c.CrashSeverity);
+
+        int PageSize = 25;
+        pagingInfo = new PageInfo();
+        page = page == 0 ? 1 : page;
+        pagingInfo.CurrentPage = page;
+        pagingInfo.TotalNumCrashes = AllCrashes.Count();
+        pagingInfo.CrashesPerPage = PageSize;
+
+        var skip = PageSize * (Convert.ToInt32(page) - 1);
+        Crashes = AllCrashes.Skip(skip).Take(PageSize).ToList();
+    }
+}

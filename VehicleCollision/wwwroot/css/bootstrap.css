@@ -3692,9 +3692,9 @@ fieldset:disabled .btn {
 
 /* line 59, src/assets/scss/_buttons.scss */
 .btn-primary {
-  color: #f6f9fe;
-  background-color: #4232c2;
-  border-color: #4232c2;
+    color: #f6f9fe;
+    background-color: #6266ea;
+    border-color: #6266ea;
 }
 
 /* line 25, src/assets/scss/mixins/_buttons.scss */
