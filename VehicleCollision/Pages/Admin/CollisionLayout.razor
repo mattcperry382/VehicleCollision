@@ -17,11 +17,11 @@
                 <div class="flex-fill mx-lg-1 mb-2">
                     <ul class="navbar-nav d-flex justify-content-evenly text-dark ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Home/Index">Home</a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li>*@
                         <li class="nav-item">
                             <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Home/CollisionData">Collision Data</a>
                         </li>
@@ -29,10 +29,10 @@
                             <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Account/StartRegistration">Register New Device</a>
                         </li>*@
                         <li>
-                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin">Admin</a>
+                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark">Data Analytics</a>
                         </li>
                         <li>
-                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark"> MATH </a>
+                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin">Admin</a>
                         </li>
                     </ul>
                 </div>
@@ -64,7 +64,7 @@
 <!-- Start Footer -->
 <footer class="bg-secondary pt-4">
     <div class="container">
-        <div class="row py-4">
+        <div class="row py-4 justify-content-between">
 
             <div class="col-lg-3 col-12 align-left">
                 <a class="navbar-brand" href="index.html">
@@ -116,16 +116,16 @@
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="work.html">Work</a>
                     </li>
-                    <li class="pb-2">
+                    @*<li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="pricing.html">Price</a>
-                    </li>
+                    </li>*@
                     <li class="pb-2">
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="contact.html">Contact</a>
                     </li>
                 </ul>
             </div>
           
-            <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+            @*<div class="col-lg-3 col-md-4 my-sm-0 mt-4">
                 <h2 class="h4 pb-lg-3 text-light light-300">Our Works</h2>
                 <ul class="list-unstyled text-light light-300">
                     <li class="pb-2">
@@ -147,14 +147,11 @@
                         <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" href="#">Graphic</a>
                     </li>
                 </ul>
-            </div>
+            </div>*@
 
             <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                <h2 class="h4 pb-lg-3 text-light light-300">For Client</h2>
+                <h2 class="h4 pb-lg-3 text-light light-300">Contact Us</h2>
                 <ul class="list-unstyled text-light light-300">
-                    <li class="pb-2">
-                        <i class='bx-fw bx bx-phone bx-xs'></i><a class="text-decoration-none text-light py-1" href="tel:010-020-0340">010-020-0340</a>
-                    </li>
                     <li class="pb-2">
                         <i class='bx-fw bx bx-mail-send bx-xs'></i><a class="text-decoration-none text-light py-1" href="mailto:providentia29@gmail.com">providentia29@gmail.com</a>
                     </li>
@@ -171,12 +168,11 @@
                         © Copyright 2022 Providentia Company. All Rights Reserved. |
                         <a class="text-lg-start text-center text-light light-300" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
                     </p>
-
-                    <div class="col-lg-6 col-sm-12">
+                    @*<div class="col-lg-6 col-sm-12">
                         <p class="text-lg-end text-center text-light light-300">
                             Designed by <a rel="sponsored" class="text-decoration-none text-light" href="https://templatemo.com/" target="_blank"><strong>TemplateMo</strong></a>
                         </p>
-                    </div>
+                    </div>*@
                 </div>
             </div>
         </div>
