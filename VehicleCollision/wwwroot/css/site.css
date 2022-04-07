@@ -6,6 +6,11 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+input[type=checkbox] {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
 .carousel-item > div > div {
     background-color: rgba(255, 255, 255, 0.9)!important;
     border-radius: 1rem;
@@ -17,9 +22,9 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #6266ea;
+    border-color: #6266ea;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
