@@ -6,7 +6,8 @@
         <div class="container d-flex justify-content-between align-items-center">
             <a class="navbar-brand h1" asp-area="" asp-controller="Home" asp-action="Index">
                 <i class='bx bx-buildings bx-sm text-dark'></i>
-                <span class="text-dark h4">Vehicle</span> <span class="text-primary h4">Collision</span>
+                <span class="text-dark h4">Utah </span>
+                <span class="text-primary h4">Motor Vehicle Collisions</span>
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler-success" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,11 +23,11 @@
                             <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="CollisionData">Collision Data</a>
+                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Home/CollisionData">Collision Data</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Account" asp-action="StartRegistration">Register New Device</a>
-                        </li>
+                        @*<li class="nav-item">
+                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Account/StartRegistration">Register New Device</a>
+                        </li>*@
                         <li>
                             <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin">Admin</a>
                         </li>
@@ -71,8 +72,7 @@
                     <span class="text-light h5">UTMVC</span> <span class="text-light h5 semi-bold-600">Collision</span>
                 </a>
                 <p class="text-light my-lg-4 my-2">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut.
+                    Monitoring the vehicle collisions on Utah roads to bring you data and valuable insights
                 </p>
                 <ul class="list-inline footer-icons light-300">
                     <li class="list-inline-item m-0">
@@ -156,7 +156,7 @@
                         <i class='bx-fw bx bx-phone bx-xs'></i><a class="text-decoration-none text-light py-1" href="tel:010-020-0340">010-020-0340</a>
                     </li>
                     <li class="pb-2">
-                        <i class='bx-fw bx bx-mail-send bx-xs'></i><a class="text-decoration-none text-light py-1" href="mailto:info@company.com">providentia29@gmail.com</a>
+                        <i class='bx-fw bx bx-mail-send bx-xs'></i><a class="text-decoration-none text-light py-1" href="mailto:providentia29@gmail.com">providentia29@gmail.com</a>
                     </li>
                 </ul>
             </div>
