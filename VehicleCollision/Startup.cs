@@ -29,10 +29,14 @@ namespace VehicleCollision
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            string IdentityDBConnection = Environment.GetEnvironmentVariable("IdentityDBConnection");
+            string CollisionDBConnection = Environment.GetEnvironmentVariable("CollisionDBConnection");
+
             services.AddDbContext<IdentityContext>(options =>
                 options.UseMySql(Configuration["ConnectionStrings:IdentityDBConnection"]));
             services.AddDbContext<CollisionContext>(options =>
-                options.UseMySql(Configuration["ConnectionStrings:CollisionDBConnection"]));
+                options.UseMySql(CollisionDBConnection));
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
