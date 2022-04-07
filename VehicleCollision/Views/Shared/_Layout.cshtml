@@ -91,7 +91,9 @@
     </header>
 
     <div class="container">
+        <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
+            <partial name="_LoginModal" />
             @RenderBody()
         </main>
     </div>
@@ -228,6 +230,7 @@
     <script src="~/js/templatemo.js"></script>
     <!-- Custom -->
     <script src="~/js/custom.js"></script>
+    <script src="~/js/site.js"></script>
     @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>*@

@@ -18,3 +18,5 @@ $(window).load(function () {
 });
 
 $('.alert').alert();
+
+
