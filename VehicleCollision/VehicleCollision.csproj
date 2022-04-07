@@ -29,4 +29,8 @@
     <Folder Include="Areas\Identity\Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\PowerBiReport.pdf" />
+  </ItemGroup>
+
 </Project>
