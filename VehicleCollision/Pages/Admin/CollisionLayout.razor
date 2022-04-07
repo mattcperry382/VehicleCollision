@@ -17,22 +17,25 @@
                 <div class="flex-fill mx-lg-1 mb-2">
                     <ul class="navbar-nav d-flex justify-content-evenly text-dark ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Home/Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @*<li class="nav-item">
+            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Home/Privacy">Privacy</a>
+        </li>*@
                         <li class="nav-item">
                             <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Home/CollisionData">Collision Data</a>
                         </li>
                         @*<li class="nav-item">
-                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Account/StartRegistration">Register New Device</a>
-                        </li>*@
+            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Account/StartRegistration">Register New Device</a>
+        </li>*@
                         <li>
-                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin">Admin</a>
+                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/Home/Contact">Contact</a>
                         </li>
                         <li>
                             <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark"> MATH </a>
+                        </li>
+                        <li>
+                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin">Admin</a>
                         </li>
                     </ul>
                 </div>
