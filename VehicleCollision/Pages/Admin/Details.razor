@@ -96,7 +96,7 @@
 
     protected override void OnParametersSet()
     {
-        c = repo.Crashes.FirstOrDefault(x => x.CrashId == Id);
+        c = repo.Crashes.Include(x =>x.CrashSeverity).FirstOrDefault(x => x.CrashId == Id);
     }
 
     public string EditUrl => $"/admin/collisions/edit/{c.CrashId}";

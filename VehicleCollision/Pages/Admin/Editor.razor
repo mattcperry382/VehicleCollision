@@ -55,11 +55,21 @@
         <ValidationMessage For="@(() => c.CountyName)"></ValidationMessage>
         <InputText class="form-control" @bind-Value="c.CountyName"></InputText>
     </div>
-    <div class="form-group">
+    ADD IN CRASH SEVERITY SELECT
+    @*<div class="form-group">
         <label>Crash Severity</label>
-        <ValidationMessage For="@(() => c.CrashSeverity.Description)"></ValidationMessage>
-        <InputText class="form-control" @bind-Value="c.CrashSeverity.Description"></InputText>
-    </div>
+        <ValidationMessage For="@(() => c.CrashSeverity)"></ValidationMessage>
+       
+        <InputSelect class="form-select" @bind-Value="c.CrashSeverity">
+           
+        @foreach (var cs in CrashData)
+        {
+            <option value="@cs.CrashSeverityId">@cs.Description</option>
+        }
+
+        </InputSelect>
+
+    </div>*@
     <div class="form-group">
         <label>Work Zone Related</label>
         <ValidationMessage For="@(() => c.WorkZoneRelated)"></ValidationMessage>
@@ -170,11 +180,16 @@
     public Crash c { get; set; } = new Crash();
 
     public ICollisionRepository repo => Service;
+
+    public IEnumerable<CrashSeverity> CrashData { get; set; }
+
     protected override void OnParametersSet()
     {
         if (Id != 0) // existing collision
         {
-            c = repo.Crashes.FirstOrDefault(x => x.CrashId == Id);
+            c = repo.Crashes.Include(x=>x.CrashSeverity).FirstOrDefault(x => x.CrashId == Id);
+            CrashData = repo.CrashSeverity.ToList();
+
         }
     }
 
