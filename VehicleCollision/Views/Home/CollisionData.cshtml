@@ -1,10 +1,22 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model List<Crash>
+﻿
 @{
-    ViewData["Title"] = "Collision Data";
 }
+
+@model CrashesViewModel
+
+<div class="row m-1 p-1">
+    <div id="crashseverity" class="col-2">
+        <h5 class="text-center">Collision Severity</h5>
+        <vc:crash-severity></vc:crash-severity>
+
+    </div>
+
+    <div class="col-10">
+        <h1>Collisions</h1>
+        <div page-number="@Model.PageInfo" page-action="CollisionData" page-class-enabled="true" page-class="btn"
+             page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+
+        <div></div>
 
 <table class="table table-responsive table-striped table-bordered">
     <thead class="thead-dark">
@@ -22,7 +34,8 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var c in Model)
+       
+        @foreach (var c in Model.Crashes)
         {
             <tr>
                 <td>@c.CrashId</td>
@@ -78,3 +91,12 @@
         }
     </tbody>
 </table>
+
+        <div page-number="@Model.PageInfo" page-action="CollisionData" page-class-enabled="true" page-class="btn"
+             page-class-normal="btn-outline-dark" page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
+
+    </div>
+</div>
+
+
+
