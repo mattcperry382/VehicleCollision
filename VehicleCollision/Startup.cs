@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -72,6 +73,9 @@ namespace VehicleCollision
                 options.IncludeSubDomains = true;
                 options.MaxAge = TimeSpan.FromDays(365);
             });
+            services.AddSingleton<InferenceSession>(
+              new InferenceSession("Models/DataAnalytics/XGBoostClassifierModel.onnx")
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -106,7 +110,7 @@ namespace VehicleCollision
 
             app.Use(async (ctx, next) =>
             {
-                ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; font-src 'self' data: fonts.gstatic.com;style-src 'self' fonts.googleapis.com; img-src 'self' data:") ;
+                ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; font-src 'self' data: fonts.gstatic.com;style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data:") ;
                 await next();
             });
 

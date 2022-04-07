@@ -13,6 +13,10 @@ namespace VehicleCollision.Controllers
     {
         private InferenceSession _session;
 
+        public DataAnalyticsController(InferenceSession session)
+        {
+            _session = session;
+        }
         public IActionResult Index()
         {
             return View("LandingPage");
@@ -25,16 +29,18 @@ namespace VehicleCollision.Controllers
         }
 
         [HttpPost]
-        public ActionResult SeverityPredicter(SeverityPrediction data)
+        public IActionResult SeverityPredicter(SeverityPrediction data)
         {
             var result = _session.Run(new List<NamedOnnxValue>
             {
                 NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())
             });
-            Tensor<float> score = result.First().AsTensor<float>();
+
+            Tensor<long> score = result.First().AsTensor<long>();
             var prediction = score.First();
             result.Dispose();
             ViewBag.Prediction = prediction;
+
             return View();
         }
     }

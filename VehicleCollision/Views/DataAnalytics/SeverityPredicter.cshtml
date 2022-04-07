@@ -9,7 +9,7 @@
     <h3>Predict Crash Severity</h3>
 </div>
 <div class="text-center">
-    <form method="post" asp-controller="DataAnalytics" asp-action="SeverityPrediction">
+    <form method="post" asp-controller="DataAnalytics" asp-action="SeverityPredicter">
         <div asp-validation-summary="All"></div>
         <label style="width:400px" asp-for="LatUtmY">LatUtmY:</label>
         <input asp-for="LatUtmY" value="4513124" />
@@ -40,6 +40,48 @@
         <br />
         <label asp-for="WildAnimalRelated">WildAnimalRelated</label>
         <input asp-for="WildAnimalRelated" value="0" />
+        <br />
+        <label asp-for="OverturnRollover">OverturnRollover</label>
+        <input asp-for="OverturnRollover" value="0" />
+        <br />
+        <label asp-for="CommercialMotorVehInvolved">CommercialMotorVehInvolved</label>
+        <input asp-for="CommercialMotorVehInvolved" value="1" />
+        <br />
+        <label asp-for="TeenageDriverInvolved">TeenageDriverInvolved</label>
+        <input asp-for="TeenageDriverInvolved" value="0" />
+        <br />
+        <label asp-for="OlderDriverInvolved">OlderDriverInvolved</label>
+        <input asp-for="OlderDriverInvolved" value="0" />
+        <br />
+        <label asp-for="NightDarkCondition">NightDarkCondition</label>
+        <input asp-for="NightDarkCondition" value="0" />
+        <br />
+        <label asp-for="DistractedDriving">DistractedDriving</label>
+        <input asp-for="DistractedDriving" value="0" />
+        <br />
+        <label asp-for="DrowsyDriving">DrowsyDriving</label>
+        <input asp-for="DrowsyDriving" value="0" />
+        <br />
+        <label asp-for="RoadwayDeparture">RoadwayDeparture</label>
+        <input asp-for="RoadwayDeparture" value="1" />
+        <br />
+        <label asp-for="CityOther">CityOther</label>
+        <input asp-for="CityOther" value="0" />
+        <br />
+        <label asp-for="CitySaltLakeCity">CitySaltLakeCity</label>
+        <input asp-for="CitySaltLakeCity" value="1" />
+        <br />
+        <label asp-for="CityWestValleyCity">CityWestValleyCity</label>
+        <input asp-for="CityWestValleyCity" value="0" />
+        <br />
+        <label asp-for="CountyNameOther">CountyNameOther</label>
+        <input asp-for="CountyNameOther" value="0" />
+        <br />
+        <label asp-for="CountyNameUtah">CountyNameUtah</label>
+        <input asp-for="CountyNameUtah" value="0" />
+        <br />
+        <label asp-for="CountyNameWeber">CountyNameWeber</label>
+        <input asp-for="CountyNameWeber" value="0" />
         <br />
         <button type="submit">Calculate</button>
     </form>

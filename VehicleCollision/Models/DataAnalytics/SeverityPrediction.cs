@@ -18,6 +18,20 @@ namespace VehicleCollision.Models.DataAnalytics
         public float Dui { get; set; }
         public float IntersectionRelated { get; set; }
         public float WildAnimalRelated { get; set; }
+        public float OverturnRollover { get; set; }
+        public float CommercialMotorVehInvolved { get; set; }
+        public float TeenageDriverInvolved { get; set; }
+        public float OlderDriverInvolved { get; set; }
+        public float NightDarkCondition { get; set; }
+        public float DistractedDriving { get; set; }
+        public float DrowsyDriving { get; set; }
+        public float RoadwayDeparture { get; set; }
+        public float CityOther { get; set; }
+        public float CitySaltLakeCity { get; set; }
+        public float CityWestValleyCity { get; set; }
+        public float CountyNameOther { get; set; }
+        public float CountyNameUtah { get; set; }
+        public float CountyNameWeber { get; set; }
 
         public Tensor<float> AsTensor()
         {
@@ -25,9 +39,14 @@ namespace VehicleCollision.Models.DataAnalytics
             {
             LatUtmY, LongUtmX, PedestrianInvolved, BicyclistInvolved,
             MotorcycleInvolved, ImproperRestraint, Unrestrained, Dui,
-            IntersectionRelated, WildAnimalRelated
+            IntersectionRelated, WildAnimalRelated, OverturnRollover,
+            CommercialMotorVehInvolved, TeenageDriverInvolved,
+            OlderDriverInvolved, NightDarkCondition, DistractedDriving,
+            DrowsyDriving, RoadwayDeparture, CityOther, CitySaltLakeCity,
+            CityWestValleyCity, CountyNameOther, CountyNameUtah,
+            CountyNameWeber
             };
-            int[] dimensions = new int[] { 1, 10 };
+            int[] dimensions = new int[] { 1, 24 };
             return new DenseTensor<float>(data, dimensions);
         }
     }
