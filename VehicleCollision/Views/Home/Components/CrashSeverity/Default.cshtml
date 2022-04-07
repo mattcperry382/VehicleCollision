@@ -1,0 +1,17 @@
+﻿
+@{
+}
+
+@model IEnumerable<string>
+
+<div class="d-grid gap-2">
+    <a asp-controller="Home" asp-action="CollisionData" asp-route-severity="" asp-route-pageNumber="1" class="btn btn-outline-secondary">Home</a>
+</div>
+@foreach (string c in Model)
+{
+    <div class="d-grid ">
+        <a asp-controller="Home" asp-action="CollisionData" asp-route-severity="@c"
+           class="btn @(ViewBag.SelectCrashSeverity == c ? "btn-primary": "btn-outline-secondary") "
+           asp-route-pageNumber="1">@c</a>
+    </div>
+}

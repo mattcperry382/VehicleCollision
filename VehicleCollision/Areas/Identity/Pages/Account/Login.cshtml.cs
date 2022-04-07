@@ -11,25 +11,20 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using Rsk.AspNetCore.Fido.Stores;
-using System.Security.Claims;
 
 namespace VehicleCollision.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-
-        private readonly IFidoKeyStore _keyStore;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(IFidoKeyStore keyStore, SignInManager<IdentityUser> signInManager, 
+        public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
             UserManager<IdentityUser> userManager)
         {
-            _keyStore = keyStore;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -50,6 +45,8 @@ namespace VehicleCollision.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+     
+
 
             [Required]
             [DataType(DataType.Password)]
@@ -80,83 +77,34 @@ namespace VehicleCollision.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
 
-           
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var (logonResult, signInResult) = await DoLogon(returnUrl);
-
-                if (!signInResult.Succeeded)
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
                 {
-                    return logonResult;
+                    _logger.LogInformation("User logged in.");
+                    return LocalRedirect(returnUrl);
                 }
-
-                var ids = (await _keyStore.GetCredentialIdsForUser(Input.Email))?.ToList();
-
-                if (ids == null || ids.Count == 0)
+                if (result.RequiresTwoFactor)
                 {
-                    return logonResult;
+                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                }
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning("User account locked out.");
+                    return RedirectToPage("./Lockout");
                 }
                 else
                 {
-                    await _signInManager.SignOutAsync();
-
-                    await HttpContext.SignInAsync(IdentityConstants.TwoFactorUserIdScheme,
-                        new ClaimsPrincipal(new ClaimsIdentity(
-                            BuildClaims(Input.Email, Input.RememberMe),
-                            IdentityConstants.TwoFactorUserIdScheme)));
-
-                    return Redirect("/Account/Login");
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return Page();
                 }
             }
 
             // If we got this far, something failed, redisplay form
             return Page();
-        }
-
-
-        private IEnumerable<Claim> BuildClaims(string userName, bool rememberme)
-        {
-            var claims = new List<Claim>();
-
-            claims.Add(new Claim("userName", userName));
-            claims.Add(new Claim("rememberme", rememberme.ToString()));
-
-            return claims;
-        }
-        private async Task<(IActionResult actionResult, Microsoft.AspNetCore.Identity.SignInResult signInResult)> DoLogon(string returnUrl)
-        {
-            IActionResult returnResult;
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-            var result =
-                await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe,
-                    lockoutOnFailure: false);
-            if (result.Succeeded)
-            {
-                _logger.LogInformation("User logged in.");
-                return (LocalRedirect(returnUrl), result);
-            }
-
-            if (result.RequiresTwoFactor)
-            {
-                return (RedirectToPage("/LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe }),
-                    result);
-            }
-
-            if (result.IsLockedOut)
-            {
-                _logger.LogWarning("User account locked out.");
-                returnResult = RedirectToPage("./Lockout");
-            }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                returnResult = Page();
-            }
-
-            return (returnResult, result);
         }
     }
 }

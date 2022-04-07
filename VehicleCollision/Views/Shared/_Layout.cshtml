@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -46,7 +48,7 @@
                                 <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin/collisions">Collision Data</a>
+                                <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="CollisionData">Collision Data</a>
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Account" asp-action="StartRegistration">Register New Device</a>
@@ -54,12 +56,15 @@
                             <li>
                                 <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin">Admin</a>
                             </li>
+                            <li>
+                                <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark"> MATH </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="navbar align-self-center d-flex">
-                        <a class="nav-link"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
-                        <a class="nav-link"><i class='bx bx-cog bx-sm text-primary'></i></a>
-                        <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login"><i class='bx bx-user-circle bx-sm text-primary'></i></a>
+                        @*<a class="nav-link"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
+                            <a class="nav-link"><i class='bx bx-cog bx-sm text-primary'></i></a>
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index"><i class='bx bx-user-circle bx-sm text-primary'></i></a>*@
                         <partial name="_LoginPartial" />
                     </div>
                 </div>
@@ -186,17 +191,18 @@
                 <div class="row pt-2">
                     <div class="col-lg-6 col-sm-12">
                         <p class="text-lg-start text-center text-light light-300">
-                            © Copyright 2022 Providentia Company. All Rights Reserved.
+                            © Copyright 2022 Providentia Company. All Rights Reserved. |
+                            <a class="text-lg-start text-center text-light light-300" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
                         </p>
-                    </div>
-                    <div class="col-lg-6 col-sm-12">
-                        <p class="text-lg-end text-center text-light light-300">
-                            Designed by <a rel="sponsored" class="text-decoration-none text-light" href="https://templatemo.com/" target="_blank"><strong>TemplateMo</strong></a>
-                        </p>
+
+                        <div class="col-lg-6 col-sm-12">
+                            <p class="text-lg-end text-center text-light light-300">
+                                Designed by <a rel="sponsored" class="text-decoration-none text-light" href="https://templatemo.com/" target="_blank"><strong>TemplateMo</strong></a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
     </footer>
     <!-- End Footer -->
