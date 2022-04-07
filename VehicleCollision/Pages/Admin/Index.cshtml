@@ -2,8 +2,8 @@
 
 @model VehicleCollision.Pages.Admin.IndexModel
 
-@*@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize]*@
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles ="Administrator")]
 
 <!DOCTYPE html>
 <html>

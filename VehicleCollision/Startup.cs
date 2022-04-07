@@ -47,10 +47,8 @@ namespace VehicleCollision
                 options.User.RequireUniqueEmail = true;
 
 
-            }).AddEntityFrameworkStores<IdentityContext>()
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<IdentityContext>()
             .AddDefaultTokenProviders();
-
-            
             //var cn = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddAuthentication();
@@ -64,7 +62,7 @@ namespace VehicleCollision
             //.AddEntityFrameworkStore(options =>
             //options.UseMySql(Configuration["ConnectionStrings:IdentityDBConnection"]));
 
-         
+      
 
 
             services.AddControllersWithViews();
