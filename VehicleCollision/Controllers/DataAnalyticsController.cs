@@ -31,22 +31,30 @@ namespace VehicleCollision.Controllers
         [HttpPost]
         public IActionResult SeverityPredicter(SeverityPrediction data)
         {
+            new InferenceSession("Models/DataAnalytics/XGBoostClassifierModel.onnx");
+
             var result = _session.Run(new List<NamedOnnxValue>
             {
                 NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())
             });
 
             Tensor<long> score = result.First().AsTensor<long>();
-            var prediction = score.First();
+            var prediction = new Prediction { PredictionValue = score.First() };
             result.Dispose();
-            ViewBag.Prediction = prediction;
 
-            return View();
+            return View("Result", prediction);
         }
 
         public IActionResult Analytics()
         {
             return View("Visualizations");
+        }
+
+        public IActionResult Vehicles()
+        {
+            new InferenceSession("Models/DataAnalytics/HGBoostClassifierModel.onnx");
+
+            return View();
         }
     }
 

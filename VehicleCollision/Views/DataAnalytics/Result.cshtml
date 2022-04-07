@@ -1,0 +1,13 @@
+﻿@{ 
+    ViewData["Title"] = "Results";
+}
+
+@model VehicleCollision.Models.DataAnalytics.Prediction
+<br />
+<br />
+<div class="container card">
+    <div class="card-header text-center text-black-50">Prediction</div>
+    <div class="text-black text-center">
+        <h3>Crash Severity: @Model.PredictionValue</h3>
+    </div>
+</div>
