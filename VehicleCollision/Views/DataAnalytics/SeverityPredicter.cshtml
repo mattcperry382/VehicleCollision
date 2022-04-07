@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Severity Predicter";
+}
+
+@model VehicleCollision.Models.DataAnalytics.SeverityPrediction
+
+<form method="post" asp-controller="DataAnalytics" asp-action="SeverityPrediction">
+
+    <div class="text-center"><label>LatUtmY:</label><input asp-for="LatUtmY" value="4513124" /></div>
+    <div><label>LongUtmX:</label><input asp-for="LongUtmX" value="422620" /></div>
+    <div><label>PedestrianInvolved</label><input asp-for="PedestrianInvolved" value="0" /></div>
+    <div><label>BicyclistInvolved</label><input asp-for="BicyclistInvolved" value="0" /></div>
+    <div><label>MotorcycleInvolved</label><input asp-for="MotorcycleInvolved" value="0" /></div>
+    <div><label>ImproperRestraint</label><input asp-for="ImproperRestraint" value="0" /></div>
+    <div><label>Unrestrained</label><input asp-for="Unrestrained" value="0" /></div>
+    <div><label>Dui</label><input asp-for="Dui" value="1" /></div>
+    <div><label>IntersectionRelated</label><input asp-for="IntersectionRelated" value="0" /></div>
+    <div><label>WildAnimalRelated</label><input asp-for="WildAnimalRelated" value="0" /></div>
+    <button type="submit">Calculate</button>
+</form>
+
+@if (ViewBag.Prediction is null)
+{
+
+}
+ else
+{
+    <div>Predicted Severity: @ViewBag.Prediction</div>
+    <div>
+        <ul>
+            <li>1 = No Injury</li>
+            <li>2 = Possible Injury</li>
+            <li>3 = Suspected Minor Injury</li>
+            <li>4 = Suspected Serious Injury</li>
+            <li>5 = fatal</li>
+        </ul>
+    </div>
+}
