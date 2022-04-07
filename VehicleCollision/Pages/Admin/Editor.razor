@@ -10,11 +10,13 @@
 
 <EditForm Model="c" OnValidSubmit="SaveCrash">
     <DataAnnotationsValidator></DataAnnotationsValidator>
-
-    <div class="form-group">
-        <label>Crash ID</label>
-        <input type="number" class="form-control" disabled value="@c.CrashId" />
-    </div>
+    @if (c.CrashId != 0)
+    {
+        <div class="form-group">
+            <label>Crash ID</label>
+            <input type="number" class="form-control" disabled value="@c.CrashId" />
+        </div>
+    }
     <div class="form-group">
         <label>CrashDatetime</label>
         <ValidationMessage For="@(() => c.CrashDatetime)"></ValidationMessage>
@@ -58,7 +60,13 @@
     <div class="form-group">
         <label>Crash Severity</label>
         <ValidationMessage For="@(() => c.CrashSeverity.Description)"></ValidationMessage>
-        <InputText class="form-control" @bind-Value="c.CrashSeverity.Description"></InputText>
+        <select class="form-control" @bind="c.CrashSeverity.Description">
+                <option selected disabled readonly>Select Severity</option>
+                @foreach (var severity in c.CrashSeverity.Description)
+                {
+                    <option>@severity</option>
+                }
+        </select>
     </div>
     <div class="form-group">
         <label>Work Zone Related</label>
@@ -167,6 +175,7 @@
     public string ThemeColor => Id == 0 ? "primary" : "warning";
     public string TitleText => Id == 0 ? "Create" : "Edit";
 
+    public IEnumerable<CrashSeverity> CrashData { get; set; }
     public Crash c { get; set; } = new Crash();
 
     public ICollisionRepository repo => Service;
@@ -174,7 +183,8 @@
     {
         if (Id != 0) // existing collision
         {
-            c = repo.Crashes.FirstOrDefault(x => x.CrashId == Id);
+            c = repo.Crashes.Include(x => x.CrashSeverity).FirstOrDefault(x => x.CrashId == Id);
+            CrashData = repo.CrashSeverity.ToList();
         }
     }
 
@@ -191,6 +201,7 @@
 
         NavManager.NavigateTo("/admin/collisions");
     }
+
 
     [Inject]
     public NavigationManager NavManager { get; set; }
