@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -74,7 +75,16 @@ namespace VehicleCollision.Controllers
         {
             return View();
         }
-
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Community, Administrator")]
+        public IActionResult Community()
+        {
+            return View();
+        }
+  
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

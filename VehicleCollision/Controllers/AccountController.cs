@@ -16,13 +16,16 @@ namespace VehicleCollision.Controllers
     {
         //fido
         private readonly IFidoAuthentication fido;
+
+        //identity
         private UserManager<IdentityUser> userManager;
         private SignInManager<IdentityUser> signInManager;
 
         public AccountController(IFidoAuthentication fido, UserManager<IdentityUser> userM, SignInManager<IdentityUser> signM)
-        {//
+        {//fido still doesn't work
 
             this.fido = fido;
+         
             userManager = userM;
             signInManager = signM;
         }
@@ -34,9 +37,9 @@ namespace VehicleCollision.Controllers
                 ReturnUrl = returnUrl
             });
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Login(Account account)
         {
             if (ModelState.IsValid)
@@ -62,6 +65,10 @@ namespace VehicleCollision.Controllers
             return Redirect(returnUrl);
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 
 
         //FIDO STUFF

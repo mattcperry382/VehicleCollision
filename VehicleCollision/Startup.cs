@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,12 +50,11 @@ namespace VehicleCollision
                 options.Password.RequiredUniqueChars = 1;
                 options.Password.RequireNonAlphanumeric = false;
                 options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedEmail = true;
 
 
-            }).AddEntityFrameworkStores<IdentityContext>()
+            }).AddRoles<IdentityRole>().AddEntityFrameworkStores<IdentityContext>()
             .AddDefaultTokenProviders();
-
-            
             //var cn = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddAuthentication();
@@ -68,7 +68,7 @@ namespace VehicleCollision
             //.AddEntityFrameworkStore(options =>
             //options.UseMySql(Configuration["ConnectionStrings:IdentityDBConnection"]));
 
-         
+      
 
 
             services.AddControllersWithViews();
@@ -93,6 +93,9 @@ namespace VehicleCollision
                 options.IncludeSubDomains = true;
                 options.MaxAge = TimeSpan.FromDays(30);
             });
+            services.AddSingleton<InferenceSession>(
+              new InferenceSession("Models/DataAnalytics/XGBoostClassifierModel.onnx")
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
