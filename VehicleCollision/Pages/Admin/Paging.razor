@@ -85,9 +85,9 @@
             anchorInnerHtml = AnchorInnerHtml(i, PI);
 
             if (anchorInnerHtml == "..")
-                tag.Attributes["href"] = "#";
+                tag.Attributes["href"] = "/admin";
             else if (i == 1)
-                tag.Attributes["href"] = "/collisions";
+                tag.Attributes["href"] = "/admin";
             else
                 tag.Attributes["href"] = "/collisions/" + i;
 
