@@ -57,7 +57,7 @@
         <ValidationMessage For="@(() => c.CountyName)"></ValidationMessage>
         <InputText class="form-control" @bind-Value="c.CountyName"></InputText>
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         <label>Crash Severity</label>
         <ValidationMessage For="@(() => c.CrashSeverity.Description)"></ValidationMessage>
         <select class="form-control" @bind="c.CrashSeverity.Description">
@@ -67,7 +67,7 @@
                     <option>@severity</option>
                 }
         </select>
-    </div>
+    </div>*@
     <div class="form-group">
         <label>Work Zone Related</label>
         <ValidationMessage For="@(() => c.WorkZoneRelated)"></ValidationMessage>
