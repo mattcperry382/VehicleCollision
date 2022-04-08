@@ -16,19 +16,18 @@
     <!-- Modal -->
     <div class="modal fade" id="privacyModal" data-ng-show="true" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <div class="modal-content rounded-3">
+                <div class="modal-header alert-primary">
+                    <h5 class="modal-title" id="staticBackdropLabel">Cookie & Privacy Consent</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privcy Policy</a>
+                    UTMVC uses cookies to improve your user experience and security. If you have question please refer to our <a asp-area="" asp-controller="Home" asp-action="Privacy">Privcy Policy</a>
                 </div>
                 <div class="modal-footer">
-                    <div id="cookieConsent" class="alert alert-primary alert-dismissible fade show" role="alert">
-                        Please
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Reject</button>
-                        <button type="button" class="btn btn-primary" data-cookie-string="@cookieString">Accept</button>
+                    <div id="cookieConsent" class="" role="alert">
+                        <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal">Reject</button>
+                        <button onclick="cookies()" type="button" class="btn btn-primary" data-bs-dismiss="modal" data-cookie-string="@cookieString">Accept</button>
                     </div>
                 </div>
             </div>

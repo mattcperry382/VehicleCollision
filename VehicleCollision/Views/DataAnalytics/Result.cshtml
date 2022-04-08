@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Results";
+}
+
+@model VehicleCollision.Models.DataAnalytics.Prediction
+<br />
+<br />
+<div class="container card">
+    <div class="card-header text-center text-black-50">Prediction</div>
+    <div class="text-black text-center">
+        <h1>Crash Severity: </h1>
+        <h3>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</h3>
+        @if (Model.PredictionValue == 1)
+        {
+            <h2>No Injury</h2>
+        }
+        else if (Model.PredictionValue == 2)
+        {
+            <h2>Possible Injury</h2>
+        }
+        else if (Model.PredictionValue == 3)
+        {
+            <h2>Suspected Minor Injury</h2>
+        }
+        else if (Model.PredictionValue == 2)
+        {
+            <h2>Suspected Serious Injury</h2>
+        }
+        else
+        {
+            <h2>Fatal</h2>
+        }
+
+    </div>
+    <div class="card-footer text-center">
+        <a class="btn btn-primary" asp-controller="DataAnalytics" asp-action="SeverityPredicter">Create another Prediction</a>
+    </div>
+</div>
