@@ -11,6 +11,48 @@ input[type=checkbox] {
     height: 1.5rem;
 }
 
+.view-collision {
+    background-color: #4232c2 !important;
+    border-color: #4232c2 !important;
+    color: #fff !important;
+}
+
+.bg-info {
+    background-color: #4232c2 !important;
+}
+
+.edit-collision {
+    background-color: #6266ea !important;
+    border-color: #6266ea !important;
+    color: #fff !important;
+}
+
+.bg-warning {
+    background-color: #6266ea !important;
+}
+
+.delete-collision {
+    color: #fff !important;
+}
+
+.view-collision:hover, .view-collision:active, .view-collision:focus, .view-collision:focus-within {
+    background-color: #5242d2 !important;
+    border-color: #5242d2 !important;
+    color: #fff !important;
+    box-shadow: 0 0 0 .25rem rgba(66,50,194,.25)!important;
+}
+
+.edit-collision:hover, .edit-collision:active, .edit-collision:focus, .edit-collision:focus-within {
+    background-color: #7276fa !important;
+    border-color: #7276fa !important;
+    color: #fff !important;
+    box-shadow: 0 0 0 .25rem rgba(66,50,194,.25)!important;
+}
+
+.delete-collision:hover, .delete-collision:active, .delete-collision:focus, .delete-collision:focus-within {
+    color: #fff !important;
+}
+
 .carousel-item > div > div {
     background-color: rgba(255, 255, 255, 0.9)!important;
     border-radius: 1rem;

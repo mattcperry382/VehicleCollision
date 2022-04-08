@@ -176,7 +176,7 @@ namespace VehicleCollision
 
             app.Use(async (ctx, next) =>
             {
-                ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; font-src 'self' data: fonts.gstatic.com;style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data:; frame-src https://airtable.com/ http://utmvc.com/CrashesByHour.png http://utmvc.com/MonthsOf2019.png http://utmvc.com//TeenageDriver.png") ;
+                ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; font-src 'self' data: fonts.gstatic.com;style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data:; frame-src 'self' https://airtable.com/") ;
                 await next();
             });
 
