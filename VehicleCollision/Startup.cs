@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -63,6 +64,16 @@ namespace VehicleCollision
                 _MailKit_SMTP_SenderEmail = Environment.GetEnvironmentVariable("MailKit_SMTP_SenderEmail");
                 _MailKit_SMTP_SenderName = Environment.GetEnvironmentVariable("MailKit_SMTP_SenderName");
             }
+
+            //GDPR COOKIE STUFF
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential 
+                // cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                // requires using Microsoft.AspNetCore.Http;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
             services.AddDbContext<IdentityContext>(options =>
                 options.UseMySql(_IdentityDBConnection));
@@ -140,6 +151,7 @@ namespace VehicleCollision
           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
 
             app.UseRouting();
 
