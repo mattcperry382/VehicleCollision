@@ -7,23 +7,5 @@ $('#loginModal').on('shown.bs.modal', function () {
 })
 
 
-(function () {
-    const deleteButton = document.querySelector("button#delete");
-
-    deleteButton.addEventListener('click', (e) => {
-        confirmDelete = confirm("Are you sure you want to delete this collision?")
-
-        if (confirmDelete) {
-            e.preventDefault();
-        }
-        else {
-            return
-        }
-    })
-
-})();
-
-
-
 
 
