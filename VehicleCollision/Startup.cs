@@ -41,6 +41,7 @@ namespace VehicleCollision
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Secrets Manager
             if (CurrentEnvironment.IsDevelopment())
             {
                 _IdentityDBConnection = Configuration["ConnectionStrings:IdentityDBConnection"];
@@ -168,6 +169,12 @@ namespace VehicleCollision
             app.Use(async (ctx, next) =>
             {
                 ctx.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; font-src 'self' data: fonts.gstatic.com;style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data:; frame-src https://airtable.com/ http://utmvc.com/CrashesByHour.png http://utmvc.com/MonthsOf2019.png http://utmvc.com//TeenageDriver.png") ;
+                await next();
+            });
+
+            app.Use(async (ctx, next) =>
+            {
+                ctx.Response.Headers.Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
                 await next();
             });
 
