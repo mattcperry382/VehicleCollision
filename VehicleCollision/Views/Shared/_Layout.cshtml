@@ -2,208 +2,215 @@
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+    @*// INTEX 2022 UTAH Motor Vehicle Collisions Site
+    // Alicia Lane, Jacob Donaldson, Jessica Kinghorn, Matt Perry
+    //4/8/2022
+    //Version 0.9
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - UT Motor Vehicle Collisions</title>
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
-    <link rel="stylesheet" href="~/css/site.css" />
-    @*<link rel="stylesheet" href="css/mdb.min.css" />*@
-    <link href="~/css/bootstrap5.1/bootstrap.min.css" rel="stylesheet" />
+    //Main Layout Page for razor pages*@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - UT Motor Vehicle Collisions</title>
+        @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+        <link rel="stylesheet" href="~/css/site.css" />
+        @*<link rel="stylesheet" href="css/mdb.min.css" />*@
+        <link href="~/css/bootstrap5.1/bootstrap.min.css" rel="stylesheet" />
 
-    <link rel="shortcut icon" type="image/x-icon" href="~/img/UTMVC (5).png">
- 
-    <!-- Load Require CSS -->
-    <link href="~/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font CSS -->
-    <link href="~/css/boxicon.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Load Tempalte CSS -->
-    <link rel="stylesheet" href="~/css/templatemo.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="~/css/custom.css">
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
-            <div class="container d-flex justify-content-between align-items-center">
-                <a class="navbar-brand h1" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img class="bx bx-sm rounded-circle" width="50" src="~/img/UTMVC.png" />
-                    <span class="text-dark h4">Utah </span>
-                    <span class="text-primary h4">Motor Vehicle Collisions</span>
-                </a>
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler-success" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <link rel="shortcut icon" type="image/x-icon" href="~/img/UTMVC (5).png">
 
-                <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="navbar-toggler-success">
-                    <div class="flex-fill mx-lg-1 mb-2">
-                        <ul class="navbar-nav d-flex justify-content-evenly text-dark ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            @*<li class="nav-item">
-                                    <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                                </li>*@
-                            <li class="nav-item">
-                                <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="CollisionData">Collision Data</a>
-                            </li>
-                            @*Fido registration button. Incomplete right now
+        <!-- Load Require CSS -->
+        <link href="~/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font CSS -->
+        <link href="~/css/boxicon.min.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+        <!-- Load Tempalte CSS -->
+        <link rel="stylesheet" href="~/css/templatemo.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="~/css/custom.css">
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white shadow">
+                <div class="container d-flex justify-content-between align-items-center">
+                    <a class="navbar-brand h1" asp-area="" asp-controller="Home" asp-action="Index">
+                        <img class="bx bx-sm rounded-circle" width="50" src="~/img/UTMVC.png" />
+                        <span class="text-dark h4">Utah </span>
+                        <span class="text-primary h4">Motor Vehicle Collisions</span>
+                    </a>
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler-success" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="navbar-toggler-success">
+                        <div class="flex-fill mx-lg-1 mb-2">
+                            <ul class="navbar-nav d-flex justify-content-evenly text-dark ms-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Account" asp-action="StartRegistration">Register New Device</a>
-                                </li>*@
-                            <li>
-                                <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="DataAnalytics" asp-action="Index"> Data Analytics</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
-                            </li>
-                            @if (SignInManager.IsSignedIn(User))
-                            {
-                                <li class="nav-item">
-                                    <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Community">Community</a>
+                                    <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
-                                @if (User.IsInRole("Administrator"))
-                                {
+                                @*<li class="nav-item">
+                                    <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                     </li>*@
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="CollisionData">Collision Data</a>
+                                </li>
+
+                                @*Fido registration button. Incomplete right now
                                     <li class="nav-item">
-                                        <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin">Admin</a>
+                                        <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Account" asp-action="StartRegistration">Register New Device</a>
+                                    </li>*@
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="DataAnalytics" asp-action="Index"> Data Analytics</a>
+                                </li>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+
+                                    <li class="nav-item">
+                                        <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Community">Community</a>
                                     </li>
+                                    @if (User.IsInRole("Administrator"))
+                                    {
+                                        <li class="nav-item">
+                                            <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" href="/admin">Admin</a>
+                                        </li>
+                                    }
                                 }
-                            }
-                            else { }
+                                else { }
+                                <li class="nav-item">
+                                    <a class="btn btn-outline-secondary rounded-pill bg-gradient shadow-4 text-dark" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="navbar align-self-center d-flex">
+                            @*<a class="nav-link"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
+                                <a class="nav-link"><i class='bx bx-cog bx-sm text-primary'></i></a>
+                                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index"><i class='bx bx-user-circle bx-sm text-primary'></i></a>*@
+                            <partial name="_LoginPartial" />
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+
+        <div class="container">
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                <partial name="_LoginModal" />
+                @RenderBody()
+            </main>
+        </div>
+
+        <br /><br />
+
+        <!-- Start Footer -->
+        <footer class="bg-secondary pt-4">
+            <div class="container">
+                <div class="row py-4 justify-content-between">
+
+                    <div class="col-lg-3 col-12 align-left">
+                        <a class="navbar-brand" href="index.html">
+                            <img class="bx bx-sm rounded-circle" width="50" src="~/img/UTMVC.png" />
+                            <span class="text-light h5">UTMVC</span> <span class="text-light h5 semi-bold-600">Collision</span>
+                        </a>
+                        <p class="text-light my-lg-4 my-2">
+                            Monitoring the vehicle collisions on Utah roads to bring you data and valuable insights
+                        </p>
+                        <ul class="list-inline footer-icons light-300">
+                            <li class="list-inline-item m-0">
+                                <a class="text-light" target="_blank" href="http://facebook.com/">
+                                    <i class='bx bxl-facebook-square bx-md'></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item m-0">
+                                <a class="text-light" target="_blank" href="https://www.linkedin.com/">
+                                    <i class='bx bxl-linkedin-square bx-md'></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item m-0">
+                                <a class="text-light" target="_blank" href="https://www.whatsapp.com/">
+                                    <i class='bx bxl-whatsapp-square bx-md'></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item m-0">
+                                <a class="text-light" target="_blank" href="https://www.flickr.com/">
+                                    <i class='bx bxl-flickr-square bx-md'></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item m-0">
+                                <a class="text-light" target="_blank" href="https://www.medium.com/">
+                                    <i class='bx bxl-medium-square bx-md'></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
-                    <div class="navbar align-self-center d-flex">
-                        @*<a class="nav-link"><i class='bx bx-bell bx-sm bx-tada-hover text-primary'></i></a>
-                            <a class="nav-link"><i class='bx bx-cog bx-sm text-primary'></i></a>
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index"><i class='bx bx-user-circle bx-sm text-primary'></i></a>*@
-                        <partial name="_LoginPartial" />
+
+                    <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+                        <h3 class="h4 pb-lg-3 text-light light-300">
+                            Our Company
+                        </h3>
+                        <ul class="list-unstyled text-light light-300">
+                            <li class="pb-2">
+                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="pb-2">
+                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
+                            </li>
+                            <li class="pb-2">
+                                <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+                        <h2 class="h4 pb-lg-3 text-light light-300">Contact Us</h2>
+                        <ul class="list-unstyled text-light light-300">
+                            <li class="pb-2">
+                                <i class='bx-fw bx bx-mail-send bx-xs'></i><a class="text-decoration-none text-light py-1" href="mailto:providentia29@gmail.com">providentia29@gmail.com</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
+                        <img src="~/img/UTMVC (1).png" width="250" />
                     </div>
                 </div>
             </div>
-        </nav>
-
-    </header>
-
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            <partial name="_LoginModal" />
-            @RenderBody()
-        </main>
-    </div>
-
-    <br /><br />
-
-    <!-- Start Footer -->
-    <footer class="bg-secondary pt-4">
-        <div class="container">
-            <div class="row py-4 justify-content-between">
-
-                <div class="col-lg-3 col-12 align-left">
-                    <a class="navbar-brand" href="index.html">
-                        <img class="bx bx-sm rounded-circle" width="50" src="~/img/UTMVC.png" />
-                        <span class="text-light h5">UTMVC</span> <span class="text-light h5 semi-bold-600">Collision</span>
-                    </a>
-                    <p class="text-light my-lg-4 my-2">
-                        Monitoring the vehicle collisions on Utah roads to bring you data and valuable insights
-                    </p>
-                    <ul class="list-inline footer-icons light-300">
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="http://facebook.com/">
-                                <i class='bx bxl-facebook-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.linkedin.com/">
-                                <i class='bx bxl-linkedin-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.whatsapp.com/">
-                                <i class='bx bxl-whatsapp-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.flickr.com/">
-                                <i class='bx bxl-flickr-square bx-md'></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item m-0">
-                            <a class="text-light" target="_blank" href="https://www.medium.com/">
-                                <i class='bx bxl-medium-square bx-md'></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h3 class="h4 pb-lg-3 text-light light-300">
-                        Our Company
-                    </h3>
-                    <ul class="list-unstyled text-light light-300">
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" asp-area="" asp-controller="Home" asp-action="About">About Us</a>
-                        </li>
-                        <li class="pb-2">
-                            <i class='bx-fw bx bxs-chevron-right bx-xs'></i><a class="text-decoration-none text-light py-1" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <h2 class="h4 pb-lg-3 text-light light-300">Contact Us</h2>
-                    <ul class="list-unstyled text-light light-300">
-                        <li class="pb-2">
-                            <i class='bx-fw bx bx-mail-send bx-xs'></i><a class="text-decoration-none text-light py-1" href="mailto:providentia29@gmail.com">providentia29@gmail.com</a>
-                        </li>
-                    </ul>
-
-                </div>
-                <div class="col-lg-3 col-md-4 my-sm-0 mt-4">
-                    <img src="~/img/UTMVC (1).png" width="250" />
-                </div>
-            </div>
-        </div>
-        <div class="w-100 bg-primary py-3">
-            <div class="container">
-                <div class="row pt-2">
-                    <div class="col-lg-6 col-sm-12">
-                        <p class="text-lg-start text-center text-light light-300">
-                            © Copyright 2022 Providentia Company. All Rights Reserved. |
-                            <a class="text-lg-start text-center text-light light-300" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
-                        </p>
-                        @*<div class="col-lg-6 col-sm-12">
-                                <p class="text-lg-end text-center text-light light-300">
-                                    Designed by <a rel="sponsored" class="text-decoration-none text-light" href="https://templatemo.com/" target="_blank"><strong>TemplateMo</strong></a>
-                                </p>
-                            </div>*@
+            <div class="w-100 bg-primary py-3">
+                <div class="container">
+                    <div class="row pt-2">
+                        <div class="col-lg-6 col-sm-12">
+                            <p class="text-lg-start text-center text-light light-300">
+                                © Copyright 2022 Providentia Company. All Rights Reserved. |
+                                <a class="text-lg-start text-center text-light light-300" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a>
+                            </p>
+                            @*<div class="col-lg-6 col-sm-12">
+                                    <p class="text-lg-end text-center text-light light-300">
+                                        Designed by <a rel="sponsored" class="text-decoration-none text-light" href="https://templatemo.com/" target="_blank"><strong>TemplateMo</strong></a>
+                                    </p>
+                                </div>*@
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
-    <!-- End Footer -->
-    <!-- Bootstrap -->
-    <script src="~/js/bootstrap.bundle.min.js"></script>
-    <!-- Load jQuery require for isotope -->
-    <script src="~/js/jquery.min.js"></script>
-    <!-- Isotope -->
-    <script src="~/js/isotope.pkgd.js"></script>
-    <!-- Templatemo -->
-    <script src="~/js/templatemo.js"></script>
-    <!-- Custom -->
-    <script src="~/js/custom.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    *@
-    @RenderSection("Scripts", required: false)
-</body>
+        </footer>
+        <!-- End Footer -->
+        <!-- Bootstrap -->
+        <script src="~/js/bootstrap.bundle.min.js"></script>
+        <!-- Load jQuery require for isotope -->
+        <script src="~/js/jquery.min.js"></script>
+        <!-- Isotope -->
+        <script src="~/js/isotope.pkgd.js"></script>
+        <!-- Templatemo -->
+        <script src="~/js/templatemo.js"></script>
+        <!-- Custom -->
+        <script src="~/js/custom.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        *@
+        @RenderSection("Scripts", required: false)
+    </body>
 </html>

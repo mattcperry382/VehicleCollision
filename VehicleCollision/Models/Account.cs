@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace VehicleCollision.Models
 {
     public class Account
-    {
+    {//Model for user account info
 
         public string UserName { get; set; }
         public string Email { get; set; }

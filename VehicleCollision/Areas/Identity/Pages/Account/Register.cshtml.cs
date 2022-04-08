@@ -96,6 +96,10 @@ namespace VehicleCollision.Areas.Identity.Pages.Account
                     {
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
+                    else if(_userManager.Options.SignIn.RequireConfirmedEmail)
+                    {
+                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    }
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
