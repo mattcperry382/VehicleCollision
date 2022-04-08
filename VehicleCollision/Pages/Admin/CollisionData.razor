@@ -60,10 +60,10 @@
                 {
                     @foreach (Crash c in Crashes)
                     {
-                        @if (i < 50)
+                        @if (1 == 1)
                         {
-                            if (!IsVisible(c))
-                                continue;
+                            //if (!IsVisible(c))
+                            //    continue;
                             <tr>
                                 @*<td>@(i += 1)</td>*@
                                 <td>@c.CrashId</td>
@@ -123,7 +123,7 @@
                                     <NavLink class="btn btn-warning btn-sm" href="@GetEditUrl(c.CrashId)">Edit</NavLink>
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger btn-sm" @onclick="@(x => RemoveCrash(c))">Delete</button>
+                                    <button id="delete" class="btn btn-danger btn-sm" @onclick="@(x => RemoveCrash(c))">Delete</button>
                                 </td>
                             </tr>
                         }
