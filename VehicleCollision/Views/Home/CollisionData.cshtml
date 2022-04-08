@@ -21,7 +21,6 @@
 <table class="table table-responsive table-striped table-bordered">
     <thead class="thead-dark">
         <tr>
-            <td>ID</td>
             <td>Date/Time</td>
             <td>Route</td>
             <td>Milepoint</td>
@@ -38,7 +37,6 @@
         @foreach (var c in Model.Crashes)
         {
             <tr>
-                <td>@c.CrashId</td>
                 <td>@c.CrashDatetime</td>
                 <td>@c.Route</td>
                 <td>@c.Milepoint</td>
