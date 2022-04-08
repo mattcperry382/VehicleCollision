@@ -44,6 +44,12 @@ namespace VehicleCollision.Controllers
             return View();
 
         }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
         public IActionResult CollisionData(string severity, int pageNum = 1)
         {
 
