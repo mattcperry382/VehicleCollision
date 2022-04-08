@@ -72,9 +72,9 @@ namespace VehicleCollision
                 // cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 // requires using Microsoft.AspNetCore.Http;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.MinimumSameSitePolicy = SameSiteMode.Strict;
             });
-
+        
             services.AddDbContext<IdentityContext>(options =>
                 options.UseMySql(_IdentityDBConnection));
             services.AddDbContext<CollisionContext>(options =>
