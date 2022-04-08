@@ -28,6 +28,6 @@ $(document).ready(function () {
     $("#privacyModal").modal('show');
 });
 
-$('.alert').alert();
+/*$('.alert').alert();*/
 
 
