@@ -2,6 +2,11 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+$('#loginModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+})
+
+
 (function () {
     const deleteButton = document.querySelector("button#delete");
 
@@ -15,17 +20,10 @@
             return
         }
     })
-  
-    var button = document.querySelector("#cookieConsent button[data-cookie-string]");
-    button.addEventListener("click", function (event) {
-        document.cookie = button.dataset.cookieString;
-    }, false);
+
 })();
 
-$('#loginModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-})
 
-$(document).ready(function () {
-    $("#privacyModal").modal('show');
-});
+
+
+
