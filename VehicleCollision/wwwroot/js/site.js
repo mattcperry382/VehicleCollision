@@ -3,6 +3,19 @@
 
 // Write your JavaScript code.
 (function () {
+    const deleteButton = document.querySelector("button#delete");
+
+    deleteButton.addEventListener('click', (e) => {
+        confirmDelete = confirm("Are you sure you want to delete this collision?")
+
+        if (confirmDelete) {
+            e.preventDefault();
+        }
+        else {
+            return
+        }
+    })
+  
     var button = document.querySelector("#cookieConsent button[data-cookie-string]");
     button.addEventListener("click", function (event) {
         document.cookie = button.dataset.cookieString;
