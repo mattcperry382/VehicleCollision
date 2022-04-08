@@ -73,6 +73,9 @@ namespace VehicleCollision
                 options.CheckConsentNeeded = context => true;
                 // requires using Microsoft.AspNetCore.Http;
                 options.MinimumSameSitePolicy = SameSiteMode.Strict;
+                options.Secure = CookieSecurePolicy.Always;
+            
+                
             });
         
             services.AddDbContext<IdentityContext>(options =>
