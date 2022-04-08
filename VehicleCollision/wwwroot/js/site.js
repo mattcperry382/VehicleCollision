@@ -15,5 +15,17 @@
             return
         }
     })
+  
+    var button = document.querySelector("#cookieConsent button[data-cookie-string]");
+    button.addEventListener("click", function (event) {
+        document.cookie = button.dataset.cookieString;
+    }, false);
 })();
 
+$('#loginModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+})
+
+$(document).ready(function () {
+    $("#privacyModal").modal('show');
+});
