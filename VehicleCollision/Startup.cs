@@ -16,7 +16,12 @@ using System.Threading.Tasks;
 using VehicleCollision.Models;
 using VehicleCollision.Services;
 
+// INTEX 2022 UTAH Motor Vehicle Collisions Site
+// Alicia Lane, Jacob Donaldson, Jessica Kinghorn, Matt Perry
+//4/8/2022
+//Version 0.9
 
+//This site allows users to securly view, predicte, and work with utah vehicla collision data
 namespace VehicleCollision
 {
     public class Startup

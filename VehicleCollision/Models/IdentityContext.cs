@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VehicleCollision.Models;
 
+//Used for connecting the Identity Data to the database
 namespace VehicleCollision.Models
 {
     public class IdentityContext : IdentityDbContext<IdentityUser>
